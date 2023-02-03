@@ -1,11 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/login';
+import Navbar from './components/navbar';
+import CashierPage from './components/cashier';
+import { Flex } from '@chakra-ui/react';
+import "./css/cashiercard.css"
 
 function App() {
   return (
     <>
-    <Login/>
+    {/* <Flex h="100vh" flexDir={"column"}> */}
+      <Navbar/>
+
+    <CashierPage/>
+
+    {/* </Flex> */}
     </>
   );
 }
