@@ -1,5 +1,5 @@
 import { Box, Image, Text, Button, Spacer, Center } from '@chakra-ui/react';
-import { SmallCloseIcon } from '@chakra-ui/icons';
+import { SmallCloseIcon, DeleteIcon } from '@chakra-ui/icons';
 
 export default function TransactionCard() {
 
@@ -19,8 +19,8 @@ export default function TransactionCard() {
             <Text ml='5' fontSize={'sm'}>X2</Text>
             {/* <Text ml='5' className='card' mt={1}>Rp 24.000</Text> */}
             <Spacer/>
-            <Button float='right' bg='none' size='sm'>
-                <SmallCloseIcon color={'#bd2e24'}/>
+            <Button float='right' bg='none' size='md'>
+                <DeleteIcon color={'#bd2e24'}/>
             </Button>
         </Center>
     );

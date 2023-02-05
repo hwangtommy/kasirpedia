@@ -1,17 +1,17 @@
 import { Box, Flex, Center, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import CashierPage from './cashier';
-import {Search2Icon} from '@chakra-ui/icons';
-import TransactionCard from './cashierTransactionCard';
+import { Search2Icon } from '@chakra-ui/icons';
+import CashierProductCard from './cashierCard';
 
 export default function CashierItem() {
     return (
         <>
-            <Flex w='95%' mt='3' float='right'>
+            <Flex w='90%' m='0 auto'>
 
-                <Box w='95%' h='85vh' overflow={'auto'} sx={{
+                <Box w='100%' h='88vh' overflow={'auto'}  borderRadius='10px' bg='#e8eaee' sx={{
                     '::-webkit-scrollbar': {
                         width: '0.4em',
-                        backgroundColor: '#FFFFFF',
+                        backgroundColor: '#e8eaee',
                     },
                     '::-webkit-scrollbar-thumb': {
                         backgroundColor: '#181D31',
@@ -21,29 +21,35 @@ export default function CashierItem() {
                         backgroundColor: '#555555',
                         borderRadius: '10px'
                     },
-                }} borderRadius='10px' bg='rgba(229, 217, 182, 0.5)'>
-                    <Flex bg='#283542' w='100%' h='60px' position={'sticky'} top='0' zIndex={'1'} alignItems='center'>
-                        <InputGroup bg='#283542'  w='40%' m='2px auto' >
+                }}>
+
+                    <Flex bg='#e8eaee' w='100%' h='60px' position={'sticky'} top='0' zIndex={'2'} justify='space-between' alignItems='center'>
+                        <InputGroup bg='#e8eaee' w='40%' m='2px auto' minW='300px'>
                             <InputLeftElement
                                 pointerEvents='none'
                                 children={<Search2Icon />} />
-                            <Input placeholder='Search' size='md' bg='white'/>
+                            <Input placeholder='Search' size='md' bg='white' />
                         </InputGroup>
-
+                        <Box>
+                            <CashierPage />
+                        </Box>
                     </Flex>
                     {/* insert item below */}
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
-                    <TransactionCard />
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
+                    <CashierProductCard/>
                 </Box>
 
-                <CashierPage />
+
             </Flex>
         </>
     );

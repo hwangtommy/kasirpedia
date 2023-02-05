@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     Box,
     Button,
@@ -18,18 +18,20 @@ import {
 } from "@chakra-ui/react";
 import TransactionCard from "./cashierTransactionCard";
 import { BiShoppingBag } from "react-icons/bi";
+import {HamburgerIcon} from '@chakra-ui/icons';
+
 // Responsive Side Bar
 export default function CashierPage() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     return (
         <>
-            <IconButton bg='rgba(229, 217, 182, 0.5)' borderRadius={'50px'} ref={btnRef} variant="ghost" fontSize="20px" icon={<BiShoppingBag />} onClick={onOpen} float='right' m='0px auto'
-            sx={{
-                _hover: {
-                    backgroundColor: '#F3EFE0'
-                }
-            }}/>
+            <IconButton bg='#e8eaee' borderRadius={'50px'} ref={btnRef} variant="ghost" fontSize="20px" icon={<HamburgerIcon />} onClick={onOpen} float='right' mr='2'
+                sx={{
+                    _hover: {
+                        backgroundColor: '#c5c8d4'
+                    }
+                }} />
             <Drawer
                 isOpen={isOpen}
                 placement="right"
@@ -39,27 +41,30 @@ export default function CashierPage() {
             >
                 <DrawerOverlay />
                 <DrawerContent>
-                    {/* <DrawerCloseButton /> */}
+                    <DrawerCloseButton />
                     <Center>
                         <DrawerHeader>Transaction</DrawerHeader>
                     </Center>
 
                     <DrawerBody>
-                        <Box p={5} h='70vh' overflow={'auto'} sx={{
+                        <Box p={5} h='70vh' overflow={'auto'} bg='#e8eaee' borderRadius='10px' sx={{
                             '::-webkit-scrollbar': {
-                                width: '0.5em',
-                                backgroundColor: '#F5F5F5',
+                                width: '0.3em',
+                                backgroundColor: '#e8eaee',
                                 borderRadius: '10px'
-                              },
-                              '::-webkit-scrollbar-thumb': {
+                            },
+                            '::-webkit-scrollbar-thumb': {
                                 backgroundColor: '#181D31',
                                 borderRadius: '10px'
-                              },
-                              '::-webkit-scrollbar-thumb:hover': {
+                            },
+                            '::-webkit-scrollbar-thumb:hover': {
                                 backgroundColor: '#555555',
                                 borderRadius: '10px'
-                              },
+                            },
                         }}>
+                            <TransactionCard />
+                            <TransactionCard />
+                            <TransactionCard />
                             <TransactionCard />
                             <TransactionCard />
                             <TransactionCard />
@@ -67,20 +72,28 @@ export default function CashierPage() {
                             <TransactionCard />
 
                         </Box>
+
+
                     </DrawerBody>
+                    <Flex ml='10' justify={'flex-start'} w='80%' fontWeight={'bold'}>
+                        <Text>Total</Text>
+
+                        <Text ml='8'>Rp 10.000.000</Text>
+                    </Flex>
 
                     <DrawerFooter display={'block'} p='3'>
-                        <Flex ml='10' justify={'flex-start'} w='80%' fontWeight={'bold'}>
-                            <Text>Sub-Total</Text>
-
-                            <Text ml='8'>Rp 10.000.000</Text>
-                        </Flex>
 
                         <Flex w='100%' justify={'flex-end'} m='0 auto' mt='2'>
-                            <Button variant="outline" mr={3} onClick={onClose}>
+                            <Button variant="outline" mr={3} onClick={onClose} w='50%' border='none'>
                                 Cancel
                             </Button>
-                            <Button color="blue" >Confirm</Button>
+                            <Button color="green" w='50%' border='none' bg='none' sx={{
+                                _hover:{
+                                    'color' : "white",
+                                    backgroundColor : '#1F8A70'
+                                },
+                                transition: "background-color color 350ms ease-in-out",
+                            }}>Print</Button>
                         </Flex>
                     </DrawerFooter>
                 </DrawerContent>

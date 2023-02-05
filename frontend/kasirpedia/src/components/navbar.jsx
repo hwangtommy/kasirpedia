@@ -1,6 +1,6 @@
 import { Box, Flex, Link, Text, Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import KasirpediaLogo from "../logos/Kasirpedia-logos_white.png";
+import KasirpediaLogo from "../logos/Kasirpedia-logos_black.png";
 
 export default function Navbar() {
 
@@ -10,7 +10,7 @@ export default function Navbar() {
             justify="space-between"
             align="center"
             p="2px 20px"
-            bg="gray.700"
+            // bg="gray.700"
             color="white"
             minW={"100vw"}
         >
@@ -19,7 +19,7 @@ export default function Navbar() {
             </Link>
 
             <Menu>
-                <MenuButton color='black' as={Button} rightIcon={<ChevronDownIcon />}>
+                <MenuButton color='black' as={Button} rightIcon={<ChevronDownIcon />} bg='none'>
                     <Text>
                         Erwin
                     </Text>
@@ -27,7 +27,7 @@ export default function Navbar() {
                         Admin
                     </Text>
                 </MenuButton>
-                <MenuList color="black" zIndex='2'>
+                <MenuList color="black" zIndex='3'>
                     <MenuItem>Make New User</MenuItem>
                     <MenuItem>Sales Report</MenuItem>
                     <MenuItem>Log Out</MenuItem>
