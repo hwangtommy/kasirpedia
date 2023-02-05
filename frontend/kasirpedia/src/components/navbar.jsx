@@ -12,8 +12,6 @@ export default function Navbar() {
             p="2px 20px"
             bg="gray.700"
             color="white"
-            position={"absolute"}
-            top="0"
             minW={"100vw"}
         >
             <Link href="#">
@@ -29,7 +27,7 @@ export default function Navbar() {
                         Admin
                     </Text>
                 </MenuButton>
-                <MenuList color="black">
+                <MenuList color="black" zIndex='2'>
                     <MenuItem>Make New User</MenuItem>
                     <MenuItem>Sales Report</MenuItem>
                     <MenuItem>Log Out</MenuItem>
