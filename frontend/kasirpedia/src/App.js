@@ -1,20 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/login';
-import ItemCard from './components/itemcard';
-import { Center } from '@chakra-ui/react'
-import ItemList from './components/itemlist';
-import UserCard from './components/usercard';
-import ListUsers from './components/listusers';
+import { Routes, Route } from "react-router-dom";
+import routes from "./routes/routes";
+import { useEffect, useState } from "react";
+import Loading from './components/loading';
 
 function App() {
-  function formatter(price){
+  const [isLoading, setIsLoading] = useState(true);
 
-  } 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 10);
+  }, []);
   return (
     <>
-    <ListUsers />
-    
+    {isLoading ? (
+      <Loading />
+    ) : (
+      <Routes key={"route"}>
+          {routes.map((val, key) => {
+            return (
+              <Route exact path={val.path} element={val.element} key={key} />
+            );
+          })}
+    </Routes>
+    )}
     </>
   );
 }
