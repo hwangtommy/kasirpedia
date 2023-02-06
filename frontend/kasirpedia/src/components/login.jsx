@@ -11,9 +11,21 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import logo from "../logos/Kasirpedia-logos_transparent.png"
+import validator from 'validator'
+import { useState } from 'react';
 
 export default function Login() {
-  return (
+    const [emailError, setEmailError] = useState('')
+    const validateEmail = (event) => {
+      let email = event.target.value
+      if (!validator.isEmail(email)) {
+        setEmailError("Please enter valid email")
+      }
+      else { 
+        setEmailError("")
+      }
+    }
+    return (
     <Flex
         minH={"100vh"}
       align={'center'}
@@ -22,7 +34,7 @@ export default function Login() {
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
             <Image src={logo} maxH={80}/>
-            <Heading fontSize={'4xl'}>Login to your account</Heading>
+            <Heading fontSize={{base: '4xl', md: '4xl', lg: '2xl'}}>Login to your account</Heading>
         </Stack>
         <Box
           rounded={'lg'}
@@ -32,8 +44,12 @@ export default function Login() {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" onChange={(event) => validateEmail(event)}/>
             </FormControl>
+            <span style={{
+            fontWeight: 'bold',
+            color: 'red',
+            }}>{emailError}</span>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <Input type="password" />
