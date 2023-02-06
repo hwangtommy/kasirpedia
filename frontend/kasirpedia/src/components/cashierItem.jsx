@@ -1,6 +1,7 @@
-import { Box, Flex, Center, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import { Box, Flex, Icon, Input, InputGroup, InputLeftElement, InputRightElement, Badge } from '@chakra-ui/react';
 import CashierPage from './cashier';
 import { Search2Icon } from '@chakra-ui/icons';
+import { GrSend } from "react-icons/gr";
 import CashierProductCard from './cashierCard';
 
 export default function CashierItem() {
@@ -8,7 +9,7 @@ export default function CashierItem() {
         <>
             <Flex w='90%' m='0 auto'>
 
-                <Box w='100%' h='88vh' overflow={'auto'}  borderRadius='10px' bg='#e8eaee' sx={{
+                <Box w='100%' h='88vh' overflow={'auto'} borderRadius='10px' bg='#e8eaee' sx={{
                     '::-webkit-scrollbar': {
                         width: '0.4em',
                         backgroundColor: '#e8eaee',
@@ -25,28 +26,37 @@ export default function CashierItem() {
 
                     <Flex bg='#e8eaee' w='100%' h='60px' position={'sticky'} top='0' zIndex={'2'} justify='space-between' alignItems='center'>
                         <InputGroup bg='#e8eaee' w='40%' m='2px auto' minW='300px'>
-                            <InputLeftElement
-                                pointerEvents='none'
-                                children={<Search2Icon />} />
-                            <Input placeholder='Search' size='md' bg='white' />
+                            <Input placeholder='Search' size='md' bg='white' borderRadius='50px' />
+                            <InputRightElement sx={{
+                                _hover: {
+                                    borderLeft: '1px solid #e8eaee',
+                                    transform: 'scale(0.90)',
+                                    transition: 'all',
+                                }
+                            }}>
+                                <Icon as={Search2Icon} />
+                            </InputRightElement>
                         </InputGroup>
+
+                        {/* logo menu */}
                         <Box>
-                            <CashierPage />
+                            <CashierPage count='5'/>
                         </Box>
+
                     </Flex>
                     {/* insert item below */}
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
-                    <CashierProductCard/>
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
+                    <CashierProductCard />
                 </Box>
 
 

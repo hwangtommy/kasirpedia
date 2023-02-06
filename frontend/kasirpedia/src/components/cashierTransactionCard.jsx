@@ -1,4 +1,4 @@
-import { Box, Image, Text, Button, Spacer, Center } from '@chakra-ui/react';
+import { Box, Image, Text, Button, Spacer, Center, Badge } from '@chakra-ui/react';
 import { SmallCloseIcon, DeleteIcon } from '@chakra-ui/icons';
 
 export default function TransactionCard() {

@@ -14,24 +14,29 @@ import {
     Flex,
     Text,
     Spacer,
+    Badge,
     useDisclosure
 } from "@chakra-ui/react";
 import TransactionCard from "./cashierTransactionCard";
 import { BiShoppingBag } from "react-icons/bi";
-import {HamburgerIcon} from '@chakra-ui/icons';
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 // Responsive Side Bar
-export default function CashierPage() {
+export default function CashierPage({ count }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
+
     return (
         <>
-            <IconButton bg='#e8eaee' borderRadius={'50px'} ref={btnRef} variant="ghost" fontSize="20px" icon={<HamburgerIcon />} onClick={onOpen} float='right' mr='2'
+            <IconButton bg='#e8eaee' ref={btnRef} fontSize="20px" icon={<HamburgerIcon />} onClick={onOpen} float='right' mr='2'
                 sx={{
                     _hover: {
                         backgroundColor: '#c5c8d4'
                     }
-                }} />
+                }}>
+                
+
+            </IconButton>
             <Drawer
                 isOpen={isOpen}
                 placement="right"
@@ -70,7 +75,6 @@ export default function CashierPage() {
                             <TransactionCard />
                             <TransactionCard />
                             <TransactionCard />
-
                         </Box>
 
 
@@ -88,9 +92,9 @@ export default function CashierPage() {
                                 Cancel
                             </Button>
                             <Button color="green" w='50%' border='none' bg='none' sx={{
-                                _hover:{
-                                    'color' : "white",
-                                    backgroundColor : '#1F8A70'
+                                _hover: {
+                                    'color': "white",
+                                    backgroundColor: '#1F8A70'
                                 },
                                 transition: "background-color color 350ms ease-in-out",
                             }}>Print</Button>
