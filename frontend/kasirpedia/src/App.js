@@ -4,9 +4,8 @@ import routes from "./routes/routes";
 import { useEffect, useState } from "react";
 import Loading from './components/loading';
 import Navbar from './components/navbar';
-import CashierPage from './components/cashier';
-import { Flex } from '@chakra-ui/react';
-import "./css/cashiercard.css"
+import CashierItem from './components/cashierItem';
+import SalesReport from './components/salesReport';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,8 +1,10 @@
 import { Box, Flex, Link, Text, Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import KasirpediaLogo from "../logos/Kasirpedia-logos_white.png";
+import KasirpediaLogo from "../logos/Kasirpedia-logos_black.png";
+import { useState } from "react";
 
 export default function Navbar() {
+    const [isAdmin, setIsAdmin] = useState(true);
 
     return (
         <Flex
@@ -10,33 +12,76 @@ export default function Navbar() {
             justify="space-between"
             align="center"
             p="2px 20px"
-            bg="gray.700"
             color="white"
-            position={"absolute"}
-            top="0"
             minW={"100vw"}
         >
             <Link href="#">
-                <Box as="img" src={KasirpediaLogo} alt="Logo" height="70px" />
+                <Box as="img" src={KasirpediaLogo} alt="Logo" height="60px" />
             </Link>
 
             <Menu>
-                <MenuButton color='black' as={Button} rightIcon={<ChevronDownIcon />}>
+                <MenuButton
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
+                    bg='none' color='black'
+                    sx={{
+                        _hover: {
+                            bg: 'none',
+                        }
+                    }}
+                >
                     <Text>
                         Erwin
                     </Text>
                     <Text fontSize="xs">
-                        Admin
+                        {isAdmin ? "Admin" : "Cashier"}
                     </Text>
+
                 </MenuButton>
-                <MenuList color="black">
-                    <MenuItem>Make New User</MenuItem>
-                    <MenuItem>Sales Report</MenuItem>
-                    <MenuItem>Log Out</MenuItem>
+
+                <MenuList color="black" zIndex='3'>
+                    {isAdmin ? (
+                        <>
+                            <MenuItem bg='none' sx={{
+                                _hover: {
+                                    bg: 'none',
+                                    color: 'gray.500'
+                                },
+                                _active: {
+                                    color: 'black'
+                                }
+                            }}>Make New User</MenuItem>
+                            <MenuItem bg='none' sx={{
+                                _hover: {
+                                    bg: 'none',
+                                    color: 'gray.500'
+                                },
+                                _active: {
+                                    color: 'black'
+                                }
+                            }}>Sales Report</MenuItem>
+                            <MenuItem bg='none' sx={{
+                                _hover: {
+                                    bg: 'none',
+                                    color: 'gray.500'
+                                },
+                                _active: {
+                                    color: 'black'
+                                }
+                            }}>Log Out</MenuItem>
+                        </>
+                    ) : (
+                        <MenuItem bg='none' sx={{
+                            _hover: {
+                                bg: 'none',
+                                color: 'gray.500'
+                            },
+                            _active: {
+                                color: 'black'
+                            }
+                        }}>Log Out</MenuItem>
+                    )}
                 </MenuList>
-                {/* <MenuList color="black">
-                    <MenuItem>Log Out</MenuItem>
-                </MenuList> */}
             </Menu>
         </Flex>
     );
