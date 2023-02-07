@@ -1,4 +1,4 @@
-import { Flex, Box, FormControl, FormLabel, Input, Checkbox, Stack, Link, Button, Heading, useColorModeValue, Image, FormHelperText } from '@chakra-ui/react';
+import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Heading, useColorModeValue, Image, FormHelperText, Alert, AlertIcon } from '@chakra-ui/react';
 import LogoKasirpedia from '../logos/Kasirpedia-logos_transparent.png';
 import { axiosInstance } from '../config/config';
 import * as Yup from 'yup';
@@ -11,6 +11,8 @@ export default function RegisterCashier() {
   YupPassword(Yup);
 
   const [enable, setEnable] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [msg, setMsg] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -21,14 +23,22 @@ export default function RegisterCashier() {
       password: '',
     },
     validationSchema: Yup.object().shape({
-      username: Yup.string().min(10, 'min 10').minLowercase(1, 'min 1 huruf kecil').minUppercase(1, 'min 1 huruf besar'),
-      name: Yup.string().min(3, 'min 3 huruf'),
-      email: Yup.string().email('ini bukan email'),
-      password: Yup.string().minLowercase(1, 'min 1 huruf kecil').minUppercase(1, 'min 1 huruf besar').min(5, 'min 5 digit'),
+      username: Yup.string().required('username tidak boleh kosong').min(5, 'min 5'),
+      name: Yup.string().required('nama tidak boleh kosong').min(3, 'min 3 huruf'),
+      email: Yup.string().required('email tidak boleh kosong').email('ini bukan email'),
+      password: Yup.string().required('password tidak boleh kosong').minLowercase(1, 'min 1 huruf kecil').minUppercase(1, 'min 1 huruf besar').min(5, 'min 5 digit'),
+      confirmation_password: Yup.string()
+        .required('password must match')
+        .oneOf([Yup.ref('password'), null], 'password must match'),
     }),
     onSubmit: async () => {
       // alert("test")
-      await axiosInstance.post('/users/', formik.values);
+      const res = await axiosInstance.post('/users/', formik.values).catch((error) => {
+        console.log(error);
+        setStatus(true);
+        setMsg(error.response.data.message);
+      });
+      console.log(res.data);
     },
   });
 
@@ -53,6 +63,12 @@ export default function RegisterCashier() {
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
             <FormControl id="username">
+              {status ? (
+                <Alert status="error" zIndex={2} variant="top-accent">
+                  <AlertIcon />
+                  {msg}
+                </Alert>
+              ) : null}
               <FormLabel>Username</FormLabel>
               <Input name="username" onChange={(e) => formik.setFieldValue('username', e.target.value)} placeholder={'Username'} type="username" />
               <FormHelperText w={'268px'} color={'red'}>
@@ -88,6 +104,14 @@ export default function RegisterCashier() {
                 {/* Enter the email you'd like to receive the newsletter on. */}
               </FormHelperText>
             </FormControl>
+            <FormControl>
+              <Input name="password" onChange={(e) => formik.setFieldValue('confirmation_password', e.target.value)} fontSize="sm" w={'268px'} h="36px" placeholder="Confirmation Password" type={'password'} />
+              <FormHelperText w={'268px'}>
+                {formik.errors.confirmation_password}
+                {/* Enter the email you'd like to receive the newsletter on. */}
+              </FormHelperText>
+            </FormControl>
+
             <Stack spacing={10}>
               {/* <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
                 <Checkbox>Remember me</Checkbox>
