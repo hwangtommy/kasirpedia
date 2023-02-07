@@ -1,4 +1,26 @@
-import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Heading, useColorModeValue, Image, FormHelperText, Alert, AlertIcon } from '@chakra-ui/react';
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Button,
+  Heading,
+  Image,
+  FormHelperText,
+  Alert,
+  AlertIcon,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  HStack,
+} from '@chakra-ui/react';
 import LogoKasirpedia from '../logos/Kasirpedia-logos_transparent.png';
 import { axiosInstance } from '../config/config';
 import * as Yup from 'yup';
@@ -33,7 +55,7 @@ export default function RegisterCashier() {
     }),
     onSubmit: async () => {
       // alert("test")
-      const res = await axiosInstance.post('/users/', formik.values).catch((error) => {
+      const res = await axiosInstance.post('/auth/v1', formik.values).catch((error) => {
         console.log(error);
         setStatus(true);
         setMsg(error.response.data.message);
@@ -51,79 +73,99 @@ export default function RegisterCashier() {
     }
   }, [formik.values]);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Box>
-            <Image width={350} height={70} objectFit={'cover'} src={LogoKasirpedia}></Image>
-          </Box>
-          <Heading fontSize={'2xl'}>Create Cashier Account</Heading>
-        </Stack>
-        <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
-          <Stack spacing={4}>
-            <FormControl id="username">
-              {status ? (
-                <Alert status="error" zIndex={2} variant="top-accent">
-                  <AlertIcon />
-                  {msg}
-                </Alert>
-              ) : null}
-              <FormLabel>Username</FormLabel>
-              <Input name="username" onChange={(e) => formik.setFieldValue('username', e.target.value)} placeholder={'Username'} type="username" />
-              <FormHelperText w={'268px'} color={'red'}>
-                {formik.errors.username}
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
 
-                {/* Enter the email you'd like to receive the newsletter on. */}
-              </FormHelperText>
-            </FormControl>
-            <FormControl id="name">
-              <FormLabel>Full name</FormLabel>
-              <Input name="name" onChange={(e) => formik.setFieldValue('name', e.target.value)} placeholder={'Full name'} type="name" />
-              <FormHelperText w={'268px'} paddingX="1" color={'red'}>
-                {formik.errors.name}
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Create your account</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            {/* Isi modal */}
+            <Flex minH={'100vh'} align={'center'} justify={'center'}>
+              <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                <Stack align={'center'}>
+                  <Box>
+                    <Image width={350} height={70} objectFit={'cover'} src={LogoKasirpedia}></Image>
+                  </Box>
+                  <Heading fontSize={'2xl'}>Create Cashier Account</Heading>
+                </Stack>
+                <Stack spacing={4}>
+                  <FormControl id="username">
+                    {status ? (
+                      <Alert status="error" zIndex={2} variant="top-accent">
+                        <AlertIcon />
+                        {msg}
+                      </Alert>
+                    ) : null}
+                    <FormLabel>Username</FormLabel>
+                    <Input name="username" onChange={(e) => formik.setFieldValue('username', e.target.value)} placeholder={'Username'} type="username" />
+                    <FormHelperText w={'268px'} color={'red'}>
+                      {formik.errors.username}
 
-                {/* Enter the email you'd like to receive the newsletter on. */}
-              </FormHelperText>
-            </FormControl>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input name="email" onChange={(e) => formik.setFieldValue('email', e.target.value)} placeholder={'Email'} type="email" />
-              <FormHelperText w={'268px'} paddingX="1" color={'red'}>
-                {formik.errors.email}
+                      {/* Enter the email you'd like to receive the newsletter on. */}
+                    </FormHelperText>
+                  </FormControl>
+                  <FormControl id="name">
+                    <FormLabel>Full name</FormLabel>
+                    <Input name="name" onChange={(e) => formik.setFieldValue('name', e.target.value)} placeholder={'Full name'} type="name" />
+                    <FormHelperText w={'268px'} paddingX="1" color={'red'}>
+                      {formik.errors.name}
 
-                {/* Enter the email you'd like to receive the newsletter on. */}
-              </FormHelperText>
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input name="password" onChange={(e) => formik.setFieldValue('password', e.target.value)} placeholder={'Password'} type="password" />
-              <FormHelperText w={'268px'} paddingX="1" color={'red'}>
-                {formik.errors.password}
+                      {/* Enter the email you'd like to receive the newsletter on. */}
+                    </FormHelperText>
+                  </FormControl>
+                  <FormControl id="email">
+                    <FormLabel>Email address</FormLabel>
+                    <Input name="email" onChange={(e) => formik.setFieldValue('email', e.target.value)} placeholder={'Email'} type="email" />
+                    <FormHelperText w={'268px'} paddingX="1" color={'red'}>
+                      {formik.errors.email}
 
-                {/* Enter the email you'd like to receive the newsletter on. */}
-              </FormHelperText>
-            </FormControl>
-            <FormControl>
-              <Input name="password" onChange={(e) => formik.setFieldValue('confirmation_password', e.target.value)} fontSize="sm" w={'268px'} h="36px" placeholder="Confirmation Password" type={'password'} />
-              <FormHelperText w={'268px'}>
-                {formik.errors.confirmation_password}
-                {/* Enter the email you'd like to receive the newsletter on. */}
-              </FormHelperText>
-            </FormControl>
+                      {/* Enter the email you'd like to receive the newsletter on. */}
+                    </FormHelperText>
+                  </FormControl>
+                  <FormControl id="password">
+                    <FormLabel>Password</FormLabel>
+                    <Input name="password" onChange={(e) => formik.setFieldValue('password', e.target.value)} placeholder={'Password'} type="password" />
+                    <FormHelperText w={'268px'} paddingX="1" color={'red'}>
+                      {formik.errors.password}
 
-            <Stack spacing={10}>
-              {/* <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
-                <Checkbox>Remember me</Checkbox>
-                <Link color={'blue.400'}>Forgot password?</Link>
-              </Stack> */}
-              <Button onClick={formik.handleSubmit} disabled={enable ? null : 'disabled'} bg={'#0095F6'} color={'white'}>
-                Add Cashier
-              </Button>
-            </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+                      {/* Enter the email you'd like to receive the newsletter on. */}
+                    </FormHelperText>
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <Input name="password" onChange={(e) => formik.setFieldValue('confirmation_password', e.target.value)} placeholder="Confirma Password" type={'password'} />
+                    <FormHelperText w={'268px'} color={'red'}>
+                      {formik.errors.confirmation_password}
+                      {/* Enter the email you'd like to receive the newsletter on. */}
+                    </FormHelperText>
+                  </FormControl>
+                  <Stack spacing={10}>
+                    {/* <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
+                      <Checkbox>Remember me</Checkbox>
+                      <Link color={'blue.400'}>Forgot password?</Link>
+                    </Stack> */}
+                    <Button onClick={formik.handleSubmit} disabled={enable ? null : 'disabled'} bg={'#0095F6'} color={'white'}>
+                      Add Cashier
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Flex>
+          </ModalBody>
+
+          <ModalFooter>
+            <HStack>
+              <Button onClick={onClose}>Cancel</Button>
+            </HStack>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
