@@ -1,13 +1,11 @@
 import { Box, Flex, Input, Text } from '@chakra-ui/react';
-import Navbar from './navbar';
 import Chart from './chart';
 
 export default function SalesReport() {
 
     return (
         <>
-            <Navbar />
-            <Flex w='95%' m='0 auto'>
+            <Flex w='65%' m='0 auto'>
 
                 <Box w='100%' h='88vh' m='0 auto' overflow={'auto'}>
                     {/* DATE */}

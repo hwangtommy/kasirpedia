@@ -3,7 +3,7 @@ import { Card, CardBody, Flex, Button, Box, Text } from '@chakra-ui/react'
 export default function UserCard(props){
     return(
         <>
-        <Card maxW="1000px" m={"10px"}>
+        <Card maxW="1080px" m={"10px"}>
             <CardBody>
                 <Flex justifyContent={"space-between"}>
                     <Text my="auto">{props.username}</Text>
