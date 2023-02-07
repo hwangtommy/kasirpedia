@@ -35,6 +35,8 @@ export default function RegisterCashier() {
   const [enable, setEnable] = useState(false);
   const [status, setStatus] = useState(false);
   const [msg, setMsg] = useState('');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen2: isVisible, onClose2, onOpen2 } = useDisclosure({ defaultIsOpen: true });
 
   const formik = useFormik({
     initialValues: {
@@ -73,8 +75,6 @@ export default function RegisterCashier() {
     }
   }, [formik.values]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -94,6 +94,7 @@ export default function RegisterCashier() {
                   </Box>
                   <Heading fontSize={'2xl'}>Create Cashier Account</Heading>
                 </Stack>
+                {/* Field input */}
                 <Stack spacing={4}>
                   <FormControl id="username">
                     {status ? (
@@ -101,42 +102,47 @@ export default function RegisterCashier() {
                         <AlertIcon />
                         {msg}
                       </Alert>
-                    ) : null}
+                    ) : (
+                      <Alert status="success" zIndex={2} variant="top-accent">
+                        <AlertIcon />
+                        {msg}
+                      </Alert>
+                    )}
                     <FormLabel>Username</FormLabel>
                     <Input name="username" onChange={(e) => formik.setFieldValue('username', e.target.value)} placeholder={'Username'} type="username" />
                     <FormHelperText w={'268px'} color={'red'}>
                       {formik.errors.username}
-
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
                   </FormControl>
+
                   <FormControl id="name">
                     <FormLabel>Full name</FormLabel>
                     <Input name="name" onChange={(e) => formik.setFieldValue('name', e.target.value)} placeholder={'Full name'} type="name" />
                     <FormHelperText w={'268px'} paddingX="1" color={'red'}>
                       {formik.errors.name}
-
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
                   </FormControl>
+
                   <FormControl id="email">
                     <FormLabel>Email address</FormLabel>
                     <Input name="email" onChange={(e) => formik.setFieldValue('email', e.target.value)} placeholder={'Email'} type="email" />
                     <FormHelperText w={'268px'} paddingX="1" color={'red'}>
                       {formik.errors.email}
-
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
                   </FormControl>
+
                   <FormControl id="password">
                     <FormLabel>Password</FormLabel>
                     <Input name="password" onChange={(e) => formik.setFieldValue('password', e.target.value)} placeholder={'Password'} type="password" />
                     <FormHelperText w={'268px'} paddingX="1" color={'red'}>
                       {formik.errors.password}
-
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
                   </FormControl>
+
                   <FormControl>
                     <FormLabel>Confirm Password</FormLabel>
                     <Input name="password" onChange={(e) => formik.setFieldValue('confirmation_password', e.target.value)} placeholder="Confirma Password" type={'password'} />
@@ -145,6 +151,7 @@ export default function RegisterCashier() {
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
                   </FormControl>
+
                   <Stack spacing={10}>
                     {/* <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
                       <Checkbox>Remember me</Checkbox>
