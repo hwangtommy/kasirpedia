@@ -7,20 +7,7 @@ export default function SalesReport() {
         <>
             <Flex w='65%' m='0 auto'>
 
-                <Box w='100%' h='88vh' m='0 auto' overflow={'auto'} sx={{
-                    '::-webkit-scrollbar': {
-                        width: '0.4em',
-                        backgroundColor: 'none',
-                    },
-                    '::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#181D31',
-                        borderRadius: '10px'
-                    },
-                    '::-webkit-scrollbar-thumb:hover': {
-                        backgroundColor: '#555555',
-                        borderRadius: '10px'
-                    },
-                }}>
+                <Box w='100%' h='88vh' m='0 auto' overflow={'auto'}>
                     {/* DATE */}
                     <Flex
                         justify='space-between'
