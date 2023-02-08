@@ -26,12 +26,12 @@ export default function CashierItem() {
                 }}>
                     {/* TOP BAR */}
                     <Flex
-                        bg='white' 
+                        bg='white'
                         w='100%' h='60px'
-                        position={'sticky'} 
-                        top='0' 
+                        position={'sticky'}
+                        top='0'
                         zIndex={'2'}
-                        justify='space-between' 
+                        justify='space-between'
                         alignItems='center'
                     >
                         {/* CATEGORIES */}
@@ -44,7 +44,7 @@ export default function CashierItem() {
                         >
                             <option>Food</option>
                             <option>Drink</option>
-                            
+
                         </Select>
                         {/* SEARCH */}
                         <InputGroup bg='white' w='40%' m='2px auto' minW='300px'>
