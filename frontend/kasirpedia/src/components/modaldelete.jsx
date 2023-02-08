@@ -6,9 +6,11 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    Button,
+    useDisclosure 
   } from '@chakra-ui/react'
 
-  function Modal2() {
+  export default function ModalDelete() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
