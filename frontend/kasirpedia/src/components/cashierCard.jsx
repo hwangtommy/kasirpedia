@@ -1,54 +1,130 @@
 import {
     Box, Center, useColorModeValue,
-    Heading, Text, Stack, Image
+    Heading, Text, Stack, Image,
+    Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody,
+    ModalFooter, useDisclosure, Button, Flex, NumberInput, NumberInputField,
+    NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper
 } from '@chakra-ui/react';
+import {useState} from 'react';
 
 const IMAGE = 'https://terserahcafenstudio.my.id/wp-content/uploads/2021/09/kopi-o-1000x600-1-600x360.jpg';
 
-export default function CashierProductCard() {
+export default function CashierProductCard(props) {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [number, setNumber] = useState(0);
+
+    function add(data,number) {
+        props.addTransaction(data , number)
+        onClose()
+    }
+
     return (
-        <Center py={5}>
-            <Box
-                role={'group'} p={3}
-                maxW={'200px'} w={'full'}
-                bg={useColorModeValue('white', 'gray.800')}
-                boxShadow={'lg'} rounded={'lg'}
-                pos={'relative'} zIndex={1}
-                sx={{
-                    _hover: {
-                        transform: 'scale(0.97)',
-                        transition: '100ms all'
-                    },
-                    _active: {
-                        transform: 'scale(0.95)',
-                        transition: 'all'
-                    }
-                }}>
+        <>
+            <Center py={5}>
+                <Box
+                    role={'group'} p={3}
+                    maxW={'200px'} w={'full'}
+                    bg={useColorModeValue('white', 'gray.800')}
+                    boxShadow={'lg'} rounded={'lg'}
+                    pos={'relative'} zIndex={1} cursor='pointer'
+                    onClick={onOpen}
+                    sx={{
+                        _hover: {
+                            transform: 'scale(0.97)',
+                            transition: '100ms all'
+                        },
+                        _active: {
+                            transform: 'scale(0.95)',
+                            transition: 'all',
+                            boxShadow: 'md'
+                        }
+                    }}>
 
-                <Image
-                    rounded={'lg'} m='0 auto'
-                    height={160} width={160}
-                    objectFit={'cover'} src={IMAGE}
-                />
+                    <Image
+                        rounded={'md'} m='0 auto'
+                        height={160} width={160}
+                        objectFit={'cover'} src={IMAGE}
+                    />
 
-                <Stack pt={5} align={'center'}>
-                    <Heading
-                        fontSize={'lg'}
-                        fontFamily={'body'}
-                        fontWeight={500}
-                    >Kopi O
-                    </Heading>
+                    <Stack pt={5} align={'center'}>
+                        <Heading
+                            fontSize={'lg'}
+                            fontFamily={'body'}
+                            fontWeight={500}
+                        > {props?.data.name}
+                        </Heading>
 
-                    <Stack direction={'row'} align={'center'}>
-                        <Text
-                            fontWeight={200}
-                            fontSize={'md'}
-                        >Rp 120.000
-                        </Text>
+                        <Stack direction={'row'} align={'center'}>
+                            <Text
+                                fontWeight={200}
+                                fontSize={'md'}
+                            >Rp {props?.data.price.toLocaleString()}
+                            </Text>
+                        </Stack>
                     </Stack>
-                </Stack>
 
-            </Box>
-        </Center>
+                </Box>
+            </Center>
+
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <Center>
+                        <ModalHeader>Quantity</ModalHeader>
+                    </Center>
+
+                    <ModalBody>
+                        <Flex w='100%' justify="space-around">
+                            <NumberInput allowMouseWheel variant="flushed" onKeyDown={(e) =>  
+                            e.key === "Enter" ? 
+                            add(props.data , number)
+                            
+                            : null
+
+                            
+                            
+                            } onChange={(val)=> setNumber(val) }>
+                                <NumberInputField />
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper border='none' />
+                                    <NumberDecrementStepper border='none' />
+                                </NumberInputStepper>
+                            </NumberInput>
+                        </Flex>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button variant={'outline'} border='none' mr={3} onClick={onClose} sx={{
+                            _hover: {
+                                transform: 'scale(0.97)',
+                                transition: 'all',
+                                color: 'red.500'
+                            },
+                            _active: {
+                                transform: 'scale(0.95)',
+                                transition: 'all',
+                            }
+                        }}>
+                            Cancel
+                        </Button>
+                        {/* TOMBOL TAMBAH */}
+                        <Button color='white' bg='#1F8A70' sx={{
+                            _hover: {
+                                bg: '#1e6654',
+                                transition: '100ms all'
+                            },
+                            _active: {
+                                transform: 'scale(0.95)',
+                                transition: 'all',
+                                boxShadow: 'md',
+                                bg: '#185445'
+                            }
+                        } } onClick={()=>{add(props.data , number)  
+                        
+                        }}>Add</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </>
     );
 }

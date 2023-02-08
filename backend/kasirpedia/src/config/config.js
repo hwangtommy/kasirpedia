@@ -1,4 +1,4 @@
-module.export  = {
+module.exports  = {
   development: {
     username: process.env.user,
     password: process.env.pass,

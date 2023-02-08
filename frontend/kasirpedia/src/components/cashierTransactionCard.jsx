@@ -1,7 +1,7 @@
 import { Box, Image, Text, Button, Spacer, Center } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
-export default function TransactionCard() {
+export default function TransactionCard(props) {
 
 
     return (
@@ -37,15 +37,15 @@ export default function TransactionCard() {
                 overflow={'hidden'}
             >
                 <Text fontWeight="bold">
-                    Kopi O
+                    {props?.data.name}
                 </Text>
                 <Text fontSize={'sm'}>
-                    Rp 120.000
+                    Rp {props?.data.price.toLocaleString()}
                 </Text>
             </Box>
 
             <Spacer />
-            <Text ml='5' fontSize={'sm'}>X2</Text>
+            <Text ml='5' fontSize={'sm'}>X{props.data.qty}</Text>
             <Spacer />
 
             <Button
@@ -54,6 +54,7 @@ export default function TransactionCard() {
                 color='red.500'
                 float='right' bg='none'
                 boxSize='40px' as={DeleteIcon}
+                onClick={props.delete}
                 sx={{
                     _hover: {
                         bg: 'none',
