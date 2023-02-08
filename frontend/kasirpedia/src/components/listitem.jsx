@@ -1,5 +1,5 @@
 import { Grid, Input, Select, Button, Flex, VStack } from "@chakra-ui/react"
-import CashierProductCard from "./cashierCard"
+import AdminProductCard from "./adminCard"
 import InfiniteScroll from 'react-infinite-scroller';
 import { useState } from "react";
 
@@ -13,12 +13,20 @@ export default function ListItem(){
         <>
         <VStack>
           <Flex w="100%">
-            <Input placeholder='Search items..' size='md' m={"12px"} w="25%"/>
-              <Select placeholder='Categories' mx={"12px"} my={"12px"} w="25%">
-                  <option value='option1'>...</option>
-              </Select>
-            <Button size='md' m={"12px"} w="25%">Add Item</Button>
-            <Button size='md' m={"12px"} w="25%">Manage Categories</Button>
+            <Input placeholder='Search items..' size='md' m={"12px"} w="50%"/>
+            <Select placeholder='Sort by' mx={"12px"} my={"12px"} w="25%">
+                <option value='asc-name'>Name (Ascending)</option>
+                <option value='desc-name'>Name (Descending)</option>
+                <option value='asc-price'>Price (Lowest to Highest)</option>
+                <option value='desc-price'>Price (Highest to Lowest)</option>
+            </Select>
+            <Select placeholder='Categories' mx={"12px"} my={"12px"} w="25%">
+                <option value='option1'>...</option>
+            </Select>
+          </Flex>
+          <Flex w="100%">
+            <Button size='md' m={"12px"} w="50%">Add Item</Button>
+            <Button size='md' m={"12px"} w="50%">Manage Categories</Button>
           </Flex>
           <InfiniteScroll
           pageStart={0}
@@ -39,7 +47,7 @@ export default function ListItem(){
             
           {
               data.map((val)=>{
-              return <CashierProductCard />
+              return <AdminProductCard />
               
               })
           }
