@@ -33,7 +33,7 @@ export default function RegisterCashier() {
   YupPassword(Yup);
 
   const [enable, setEnable] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen2: isVisible, onClose2, onOpen2 } = useDisclosure({ defaultIsOpen: true });
@@ -57,11 +57,18 @@ export default function RegisterCashier() {
     }),
     onSubmit: async () => {
       // alert("test")
-      const res = await axiosInstance.post('/auth/v1', formik.values).catch((error) => {
-        console.log(error);
-        setStatus(true);
-        setMsg(error.response.data.message);
-      });
+      const res = await axiosInstance
+        .post('/auth/v1', formik.values)
+        .then((res) => {
+          console.log(res.data);
+          setStatus('success');
+          setMsg('Data inserted');
+        })
+        .catch((error) => {
+          console.log(error);
+          setStatus('error');
+          setMsg(error.response.data.message);
+        });
       console.log(res.data);
     },
   });
@@ -97,17 +104,17 @@ export default function RegisterCashier() {
                 {/* Field input */}
                 <Stack spacing={4}>
                   <FormControl id="username">
-                    {status ? (
-                      <Alert status="error" zIndex={2} variant="top-accent">
-                        <AlertIcon />
-                        {msg}
-                      </Alert>
-                    ) : (
+                    {status == 'success' ? (
                       <Alert status="success" zIndex={2} variant="top-accent">
                         <AlertIcon />
                         {msg}
                       </Alert>
-                    )}
+                    ) : status == 'error' ? (
+                      <Alert status="error" zIndex={2} variant="top-accent">
+                        <AlertIcon />
+                        {msg}
+                      </Alert>
+                    ) : null}
                     <FormLabel>Username</FormLabel>
                     <Input name="username" onChange={(e) => formik.setFieldValue('username', e.target.value)} placeholder={'Username'} type="username" />
                     <FormHelperText w={'268px'} color={'red'}>
