@@ -20,6 +20,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   HStack,
+  CloseButton,
 } from '@chakra-ui/react';
 import LogoKasirpedia from '../logos/Kasirpedia-logos_transparent.png';
 import { axiosInstance } from '../config/config';
@@ -36,7 +37,7 @@ export default function RegisterCashier() {
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen2: isVisible, onClose2, onOpen2 } = useDisclosure({ defaultIsOpen: true });
+  // const { isOpen2, onClose2, onOpen2 } = useDisclosure();
 
   const formik = useFormik({
     initialValues: {
@@ -84,12 +85,12 @@ export default function RegisterCashier() {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>Create Cashier</Button>
 
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          {/* <ModalHeader>Create your account</ModalHeader> */}
           <ModalCloseButton />
           <ModalBody pb={6}>
             {/* Isi modal */}
@@ -104,12 +105,12 @@ export default function RegisterCashier() {
                 {/* Field input */}
                 <Stack spacing={4}>
                   <FormControl id="username">
-                    {status == 'success' ? (
+                    {status === 'success' ? (
                       <Alert status="success" zIndex={2} variant="top-accent">
                         <AlertIcon />
                         {msg}
                       </Alert>
-                    ) : status == 'error' ? (
+                    ) : status === 'error' ? (
                       <Alert status="error" zIndex={2} variant="top-accent">
                         <AlertIcon />
                         {msg}

@@ -92,7 +92,6 @@ const authController = {
         email,
         password: hashPassword,
         name,
-        isAdmin: false,
       };
 
       const result = await User.create({ ...data });
