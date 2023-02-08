@@ -1,11 +1,11 @@
 import './App.css';
 // import RegisterCashier from './components/registerCashier';
-import Login from './components/login';
+import Test from './components/test';
 
 function App() {
   return (
     <>
-      <Login />
+      <Test />
     </>
   );
 }
