@@ -2,6 +2,7 @@ import { Box, Flex, Link, Text, Menu, MenuButton, MenuList, MenuItem, Button } f
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import KasirpediaLogo from "../logos/Kasirpedia-logos_black.png";
 import { useState } from "react";
+import { Link as ReachLink } from "react-router-dom"
 
 export default function Navbar() {
     const [isAdmin, setIsAdmin] = useState(true);
@@ -51,15 +52,21 @@ export default function Navbar() {
                                     color: 'black'
                                 }
                             }}>Make New User</MenuItem>
-                            <MenuItem bg='none' sx={{
-                                _hover: {
-                                    bg: 'none',
-                                    color: 'gray.500'
-                                },
-                                _active: {
-                                    color: 'black'
-                                }
-                            }}>Sales Report</MenuItem>
+                            <Link as={ReachLink} to="/chart" >
+                                <MenuItem bg='none'
+
+                                    sx={{
+                                        _hover: {
+                                            bg: 'none',
+                                            color: 'gray.500'
+                                        },
+                                        _active: {
+                                            color: 'black'
+                                        }
+                                    }}>Sales Report</MenuItem>
+
+
+                            </Link>
                             <MenuItem bg='none' sx={{
                                 _hover: {
                                     bg: 'none',

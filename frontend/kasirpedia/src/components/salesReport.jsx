@@ -42,7 +42,7 @@ export default function SalesReport() {
                                 variant='flushed'
                             />
                         </Flex>
-                        
+
                     </Flex>
                     {/* BAGIAN CHART */}
                     <Chart />
