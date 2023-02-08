@@ -18,7 +18,7 @@ export default function ListItem(){
       hasMore={true || false}
       loader={<div className="loader" key={0}>Loading ...</div>}
   
-        // loader={<h4>Loading...</h4>}
+        // Need to re-configure InfiniteScroll once backend is done.
         endMessage={
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all</b>
