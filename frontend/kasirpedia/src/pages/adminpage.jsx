@@ -2,6 +2,7 @@ import ListUsers from "../components/listusers";
 import ItemList from "../components/itemlist";
 import Navbar from "../components/navbar"
 import SalesReport from "../components/salesReport"
+import ListItem from "../components/listitem";
 import { Center } from "@chakra-ui/react"
 import { useState } from "react";
 import { useEffect } from "react";
@@ -16,7 +17,7 @@ export default function AdminPage(){
         <Navbar setNav={setNav} />
         <Center>
             {nav === "item" ? 
-            <ItemList /> 
+            <ListItem /> 
             : 
             nav === "user" ? 
             <ListUsers />

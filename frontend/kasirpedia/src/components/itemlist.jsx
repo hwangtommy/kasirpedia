@@ -1,5 +1,6 @@
 import { Flex, Input, Select, Button, Grid, GridItem } from '@chakra-ui/react'
 import ItemCard from './itemcard'
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function ItemList(){
     return(
