@@ -2,6 +2,7 @@ import { Box, Flex, Link, Text, Menu, MenuButton, MenuList, MenuItem, Button } f
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import KasirpediaLogo from "../logos/Kasirpedia-logos_white.png";
 import { useState } from "react";
+import { Link as ReachLink } from "react-router-dom"
 
 export default function Navbar(props) {
     const [isAdmin, setIsAdmin] = useState(true);

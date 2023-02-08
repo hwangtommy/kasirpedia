@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-const data = [ 
+const data = [
     {
         date: '20/01/2023',
         total: '3000'
@@ -44,7 +44,7 @@ export default function Chart() {
                     <Tooltip />
                     <Legend />
                     <Bar dataKey='total' fill='#82ca9d' />
-                    
+
                 </BarChart>
 
             </ResponsiveContainer>
