@@ -13,10 +13,10 @@ export default function ListItem(){
     return(
         <>
         <InfiniteScroll
-      pageStart={0}
-      loadMore={fetchData}
-      hasMore={true || false}
-      loader={<div className="loader" key={0}>Loading ...</div>}
+        pageStart={0}
+        loadMore={fetchData}
+        hasMore={true || false}
+        loader={<div className="loader" key={0}>Loading ...</div>}
   
         // Need to re-configure InfiniteScroll once backend is done.
         endMessage={
@@ -34,10 +34,6 @@ export default function ListItem(){
              
             })
         }
-
-          
-        
-        
         </Grid>
         </InfiniteScroll>
         </>
