@@ -3,9 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import routes from "./routes/routes";
 import { useEffect, useState } from "react";
 import Loading from './components/loading';
-import Navbar from './components/navbar';
-import CashierItem from './components/cashierItem';
-import SalesReport from './components/salesReport';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);

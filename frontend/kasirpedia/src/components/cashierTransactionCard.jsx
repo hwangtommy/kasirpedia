@@ -3,6 +3,7 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 export default function TransactionCard() {
 
+
     return (
         <Center
             maxW='400px' minW='200px'

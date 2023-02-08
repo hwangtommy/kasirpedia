@@ -4,20 +4,20 @@ import UserCard from './usercard'
 export default function ListUsers() {
     return (
         <>
-            <Flex flexDir={"column"} maxW={"1020px"} m={"10px"} border={"1px solid grey"} borderRadius={10}>
-                <Button maxW="1000px" m={"10px"}>Add New User</Button>
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-                <UserCard username="hwangtommy" />
-            </Flex>
+        <Flex flexDir={"column"} minW={"60%"} m={"10px"}>
+            <Button maxW="1080px" m={"10px"}>Add New User</Button>
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+            <UserCard username="hwangtommy" />
+        </Flex>
         </>
     )
 }
