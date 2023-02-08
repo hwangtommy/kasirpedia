@@ -1,24 +1,19 @@
-import CashierItem from "../components/cashierItem"
-import Login from "../components/login"
+import CashierItem from "../pages/cashierItem"
 import AdminPage from "../pages/adminpage"
-import SalesReport from "../components/salesReport"
+import LoginPage from "../pages/loginpage"
 
 const routes = [
     {
         path: "/",
-        element: (<Login />)
+        element: (<LoginPage />)
     },
     {
         path: "/admin",
         element: (<AdminPage />)
     },
     {
-        path: "/kasir",
+        path: "/cashier",
         element: (<CashierItem/>)
-    },
-    {
-        path: "/admin/salesreport",
-        element: (<SalesReport/>)
     }
 ]
 

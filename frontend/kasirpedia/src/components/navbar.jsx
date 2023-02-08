@@ -16,7 +16,7 @@ export default function Navbar(props) {
             minW={"100vw"}
             boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
             pos={"sticky"}
-            zIndex={1}
+            zIndex={2}
             top="0"
         >
             <Link href="#">
