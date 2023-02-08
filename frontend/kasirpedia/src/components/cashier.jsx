@@ -1,13 +1,12 @@
 import {
-    Box, Button, IconButton,
+    Box, Button,
     Drawer, DrawerBody, DrawerFooter,
     DrawerHeader, DrawerOverlay, DrawerContent,
-    DrawerCloseButton, Center, Flex, Heading,
-    Text, Badge, useDisclosure
+    DrawerCloseButton, Center, Flex,
+    Text, Badge,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from '@chakra-ui/icons';
 import TransactionCard from "./cashierTransactionCard";
-import React, { useState } from "react";
+
 
 
 export default function CashierPage(props) {
@@ -125,8 +124,8 @@ export default function CashierPage(props) {
                     <Badge
                         colorScheme='red' fontWeight="bold" fontSize='xs'
                         px={2} py={1} position="absolute"
-                        top={1} right={0} rounded='full'
-                        variant='solid' boxSize='7'
+                        top={0} right={0} rounded='full'
+                        variant='solid' boxSize='7' zIndex='-1'
                     >
                         <Center>
                             {props.transaction.length}

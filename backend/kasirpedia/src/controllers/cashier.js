@@ -15,6 +15,25 @@ const cashierProducts = {
                 message: err
             });
         }
+    },
+    searchProducts: async (req, res) => {
+        try {
+            const products = req.params
+            const result = await Products.findAll({
+                where: {
+                    name: products
+                }
+            })
+
+            return res.status(200).json({
+                message: 'search data fetched',
+                result: result
+            })
+        } catch(err) {
+            return res.status(400).json({
+                message: err
+            })
+        }
     }
 };
 

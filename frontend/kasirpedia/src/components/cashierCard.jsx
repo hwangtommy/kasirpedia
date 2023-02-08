@@ -5,16 +5,16 @@ import {
     ModalFooter, useDisclosure, Button, Flex, NumberInput, NumberInputField,
     NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper
 } from '@chakra-ui/react';
-import {useState} from 'react';
+import { useState } from 'react';
 
 const IMAGE = 'https://terserahcafenstudio.my.id/wp-content/uploads/2021/09/kopi-o-1000x600-1-600x360.jpg';
 
 export default function CashierProductCard(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState(1);
 
-    function add(data,number) {
-        props.addTransaction(data , number)
+    function add(data, number) {
+        props.addTransaction(data, number)
         onClose()
     }
 
@@ -46,11 +46,28 @@ export default function CashierProductCard(props) {
                         objectFit={'cover'} src={IMAGE}
                     />
 
-                    <Stack pt={5} align={'center'}>
+                    <Stack pt={5} align={'center'} >
                         <Heading
                             fontSize={'lg'}
                             fontFamily={'body'}
                             fontWeight={500}
+                            maxH='22px' overflow={'auto'} textAlign='center'
+                            sx={{
+                                '::-webkit-scrollbar': {
+                                    width: '0.1em',
+                                    backgroundColor: 'none',
+                                    borderRadius: '10px'
+                                },
+                                '::-webkit-scrollbar-thumb': {
+                                    // backgroundColor: '#181D31',
+                                    backgroundColor: 'none',
+                                    borderRadius: '10px'
+                                },
+                                '::-webkit-scrollbar-thumb:hover': {
+                                    backgroundColor: 'none',
+                                    borderRadius: '10px'
+                                },
+                            }}
                         > {props?.data.name}
                         </Heading>
 
@@ -75,15 +92,11 @@ export default function CashierProductCard(props) {
 
                     <ModalBody>
                         <Flex w='100%' justify="space-around">
-                            <NumberInput allowMouseWheel variant="flushed" onKeyDown={(e) =>  
-                            e.key === "Enter" ? 
-                            add(props.data , number)
-                            
-                            : null
-
-                            
-                            
-                            } onChange={(val)=> setNumber(val) }>
+                            <NumberInput allowMouseWheel defaultValue='1' variant="flushed" min='1' max='100'
+                                onKeyDown={(e) =>
+                                    e.key === "Enter" ?
+                                        add(props.data, number) : null}
+                                onChange={(val) => setNumber(val)}>
                                 <NumberInputField />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper border='none' />
@@ -119,8 +132,9 @@ export default function CashierProductCard(props) {
                                 boxShadow: 'md',
                                 bg: '#185445'
                             }
-                        } } onClick={()=>{add(props.data , number)  
-                        
+                        }} onClick={() => {
+                            add(props.data, number)
+
                         }}>Add</Button>
                     </ModalFooter>
                 </ModalContent>

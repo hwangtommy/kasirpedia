@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Input, InputGroup, InputRightElement, Grid, Select, useDisclosure,IconButton } from '@chakra-ui/react';
+import { Box, Flex, Icon, Input, InputGroup, InputRightElement, Grid, Select, useDisclosure, IconButton } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
 import Navbar from './navbar';
 import CashierPage from './cashier';
@@ -9,40 +9,29 @@ import React from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 export default function CashierItem() {
-    const [datas,setDatas] = useState([]);
+    const [datas, setDatas] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
-    const [transaction, setTransaction] = useState([
-        {
-            name: 'te1',
-            price: 5000,
-            qty: 4
-        },
-        {
-            name: 'no',
-            price: 8000,
-            qty: 2
-        }
-    ]);
+    const [transaction, setTransaction] = useState([]);
 
-    function addTransaction(data,qty) {
+    function addTransaction(data, qty) {
         console.log("asd")
         const trans = {
             ...data,
             qty
         }
-        setTransaction([...transaction,trans])
-        onOpen()
+        setTransaction([...transaction, trans])
     }
 
-    async function fetchData(){
- await axiosInstance.get("/cashier").then((res) => {
-    setDatas([...res.data.result])
- }) }
- 
- useEffect(()=> {
-    fetchData()
-     },[])
+    async function fetchData() {
+        await axiosInstance.get("/cashier").then((res) => {
+            setDatas([...res.data.result])
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <>
@@ -65,12 +54,12 @@ export default function CashierItem() {
                 }}>
                     {/* TOP BAR */}
                     <Flex
-                        bg='white' 
+                        bg='white'
                         w='100%' h='60px'
-                        position={'sticky'} 
-                        top='0' 
+                        position={'sticky'}
+                        top='0'
                         zIndex={'2'}
-                        justify='space-between' 
+                        justify='space-between'
                         alignItems='center' mb='5'
                     >
                         {/* CATEGORIES */}
@@ -83,7 +72,7 @@ export default function CashierItem() {
                         >
                             <option>Food</option>
                             <option>Drink</option>
-                            
+
                         </Select>
                         {/* SEARCH */}
                         <InputGroup bg='white' w='40%' m='2px auto' minW='300px'>
@@ -101,21 +90,21 @@ export default function CashierItem() {
 
                         {/*MENU*/}
                         <Box>
-                        <IconButton
-                bg='none' ref={btnRef}
-                fontSize="20px" icon={<HamburgerIcon />}
-                onClick={onOpen} mr='3'
-                sx={{
-                    _hover: {
-                        backgroundColor: 'none',
-                        color: 'gray.500'
-                    },
-                    _active: {
-                        transform: 'scale(0.95)',
-                        transition: 'all'
-                    }
-                }}
-            />
+                            <IconButton
+                                bg='none' ref={btnRef}
+                                fontSize="20px" icon={<HamburgerIcon />}
+                                onClick={onOpen} mr='3'
+                                sx={{
+                                    _hover: {
+                                        backgroundColor: 'none',
+                                        color: 'gray.500'
+                                    },
+                                    _active: {
+                                        transform: 'scale(0.95)',
+                                        transition: 'all'
+                                    }
+                                }}
+                            />
                             <CashierPage onClose={onClose} btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} transaction={transaction} setTransaction={setTransaction} />
                         </Box>
 
@@ -126,13 +115,13 @@ export default function CashierItem() {
                         gap={{ sm: '1', md: '2', lg: '3', xl: '4' }}
                     >{/* insert item below */}
 
-                    {
-                        datas?.map((val) => {
-                       return <CashierProductCard onOpen={onOpen} data={val} addTransaction={addTransaction}/>
+                        {
+                            datas?.map((val) => {
+                                return <CashierProductCard onOpen={onOpen} data={val} addTransaction={addTransaction} />
 
-                        })
-                    }
-                       
+                            })
+                        }
+
                     </Grid>
 
                 </Box>
