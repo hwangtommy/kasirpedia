@@ -13,6 +13,9 @@ const { authRoute } = require('./routes');
 const db = require('./models');
 app.use('/auth', authRoute);
 
+app.use(cors());
+app.use(express.json());
+
 app.listen(PORT, () => {
   console.log(`API IS RUNNING ON PORT ${PORT}`);
 });
