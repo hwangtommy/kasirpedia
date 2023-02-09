@@ -1,8 +1,8 @@
 import { Box, Flex, Icon, Input, InputGroup, InputRightElement, Grid, Select, useDisclosure, IconButton } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
-import Navbar from './navbar';
-import CashierPage from './cashier';
-import CashierProductCard from './cashierCard';
+import Navbar from '../components/navbar';
+import CashierPage from '../components/cashier';
+import CashierProductCard from '../components/cashierCard';
 import { axiosInstance } from '../config/config';
 import { useEffect, useState } from 'react';
 import React from 'react';
