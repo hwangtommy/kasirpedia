@@ -1,7 +1,7 @@
-import { Box, Image, Text, Button, Spacer, Center } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
+import { Box, Image, Text, Button, Spacer, Center, Flex } from '@chakra-ui/react';
+import { SmallCloseIcon } from '@chakra-ui/icons';
 
-export default function TransactionCard() {
+export default function TransactionCard(props) {
 
 
     return (
@@ -36,37 +36,57 @@ export default function TransactionCard() {
                 maxW={'100px'} maxH='70px'
                 overflow={'hidden'}
             >
-                <Text fontWeight="bold">
-                    Kopi O
+                <Text fontWeight="bold" overflow={'auto'} maxH={'50px'}
+                    lineHeight='shorter' fontSize='sm'
+                    sx={{
+                        '::-webkit-scrollbar': {
+                            width: '0.1em',
+                            backgroundColor: 'none',
+                            borderRadius: '10px'
+                        },
+                        '::-webkit-scrollbar-thumb': {
+                            // backgroundColor: '#181D31',
+                            backgroundColor: 'none',
+                            borderRadius: '10px'
+                        },
+                        '::-webkit-scrollbar-thumb:hover': {
+                            backgroundColor: 'none',
+                            borderRadius: '10px'
+                        },
+                    }}
+                >
+                    {props?.data.name}
                 </Text>
                 <Text fontSize={'sm'}>
-                    Rp 120.000
+                    Rp {props?.data.price.toLocaleString()}
                 </Text>
             </Box>
 
             <Spacer />
-            <Text ml='5' fontSize={'sm'}>X2</Text>
-            <Spacer />
+            <Flex alignItems='center' w='100px' justifyContent={'space-between'}>
+                <Text fontSize={'sm'} fontWeight='medium'>X {props.data.qty}</Text>
 
-            <Button
-                mr='2' p='10px'
-                borderRadius='50px'
-                color='red.500'
-                float='right' bg='none'
-                boxSize='40px' as={DeleteIcon}
-                sx={{
-                    _hover: {
-                        bg: 'none',
-                        color: 'red.600',
-                        cursor: 'pointer'
-                    },
-                    _active: {
-                        transform: 'scale(0.95)',
-                        transition: 'all',
-                        color: 'red.700'
-                    }
-                }}
-            />
+                <Button
+                    p='5px'
+
+                    color='red.500'
+                    float='right' bg='none'
+                    boxSize='40px' as={SmallCloseIcon}
+                    onClick={props.delete}
+                    sx={{
+                        _hover: {
+                            bg: 'none',
+                            color: 'red.600',
+                            cursor: 'pointer'
+                        },
+                        _active: {
+                            transform: 'scale(0.95)',
+                            transition: 'all',
+                            color: 'red.700'
+                        }
+                    }}
+                />
+            </Flex>
 
         </Center>
     );

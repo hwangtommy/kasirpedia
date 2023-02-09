@@ -1,0 +1,106 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "jordan.ongg",
+      "password": "password",
+      "name": "Jordan",
+      "avatar_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Dwayne_Johnson_2014_%28cropped%29.jpg/640px-Dwayne_Johnson_2014_%28cropped%29.jpg",
+      "desc": "Laundry Shoe & Bag ll Unyellowing ll Repair ll Repaint ll Sole Protect"
+    },
+    {
+      "id": 2,
+      "username": "heri",
+      "password": "password",
+      "name": "Heriyanto",
+      "avatar_url": "https://parade.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgwOTIyMDYxMTcwNTU2/john-cena-net-worth.jpg",
+      "desc": "Hello my name is heri"
+    },
+    {
+      "id": 3,
+      "username": "bruno",
+      "password": "password",
+      "name": "Bruno Mars",
+      "avatar_url": "https://media.resources.festicket.com/www/artists/BrunoMars_New.jpg",
+      "desc": ""
+    },
+    {
+      "username": "jordansmrd",
+      "password": "password",
+      "email": "a@mail.com",
+      "name": "Jordan Sumardi",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "username": "raul.fernandex",
+      "password": "password",
+      "email": "a@mail.com",
+      "name": "raul",
+      "avatar_url": "",
+      "desc": ""
+    },
+    {
+      "id": 6,
+      "username": "asdsad",
+      "password": "sadsada",
+      "email": "asdsa",
+      "name": "sadsad",
+      "avatar_url": "",
+      "desc": ""
+    },
+    {
+      "id": 7,
+      "username": "anakbaru",
+      "password": "password",
+      "email": "ab@mail.com",
+      "name": "anak baru",
+      "avatar_url": "",
+      "desc": ""
+    },
+    {
+      "id": 8,
+      "username": "anakbaru2",
+      "password": "password",
+      "email": "anakbaru2@mail.com",
+      "name": "anak baru banget",
+      "avatar_url": "",
+      "desc": ""
+    },
+    {
+      "id": 9,
+      "email": "jordan@mail.com",
+      "username": "Joe123456789",
+      "password": "Password",
+      "name": "joe",
+      "avatar_url": "",
+      "desc": ""
+    },
+    {
+      "id": 10,
+      "email": "jordan@mail.com",
+      "username": "Jordan123456",
+      "password": "Password",
+      "name": "jordan",
+      "avatar_url": "",
+      "desc": ""
+    },
+    {
+      "id": 11,
+      "email": "dio@mail.com",
+      "username": "Dapone1111",
+      "password": "Dapone",
+      "name": "dio",
+      "avatar_url": "",
+      "desc": ""
+    },
+
+    {
+      "id": 14,
+      "username": "Babikecapjos",
+      "name": "Babi",
+      "email": "babi@mail.com",
+      "password": "Babikecap"
+    }
+  ]
+}
