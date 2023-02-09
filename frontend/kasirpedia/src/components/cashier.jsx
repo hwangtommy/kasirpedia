@@ -1,40 +1,42 @@
-import React from "react";
 import {
-    Box, Button, IconButton,
+    Box, Button,
     Drawer, DrawerBody, DrawerFooter,
     DrawerHeader, DrawerOverlay, DrawerContent,
     DrawerCloseButton, Center, Flex,
-    Text, Badge, useDisclosure
+    Text, Badge,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from '@chakra-ui/icons';
 import TransactionCard from "./cashierTransactionCard";
 
 
-export default function CashierPage() {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const btnRef = React.useRef();
+
+export default function CashierPage(props) {
+    // const { isOpen, onOpen, onClose } = useDisclosure();
+    // const btnRef = React.useRef();
+   
+
+    function deleteCard(idx) {
+        const arr = [...props.transaction]
+        arr.splice(idx, 1)
+        props.setTransaction([...arr]);
+    };
+    function deleteAll() {
+        props.setTransaction([]);
+    }
+    const calculateTotalValue = transactions =>
+        transactions.reduce((total, transaction) =>
+            total + (transaction.price * transaction.qty), 0);
+
+    const totalValue = calculateTotalValue(props.transaction);
+
+
 
     return (
         <>
-            <IconButton
-                bg='none' ref={btnRef}
-                fontSize="20px" icon={<HamburgerIcon />}
-                onClick={onOpen} mr='3'
-                sx={{
-                    _hover: {
-                        backgroundColor: 'none',
-                        color: 'gray.500'
-                    },
-                    _active: {
-                        transform: 'scale(0.95)',
-                        transition: 'all'
-                    }
-                }}
-            />
+            
 
             <Drawer
-                isOpen={isOpen} placement="right"
-                onClose={onClose} finalFocusRef={btnRef}
+                isOpen={props.isOpen} placement="right"
+                onClose={props.onClose} finalFocusRef={props.btnRef}
                 size='md'
             >
                 <DrawerOverlay />
@@ -72,14 +74,13 @@ export default function CashierPage() {
                                 borderRadius: '10px'
                             },
                         }}>
-                            <TransactionCard />
-                            <TransactionCard />
-                            <TransactionCard />
-                            <TransactionCard />
-                            <TransactionCard />
-                            <TransactionCard />
-                            <TransactionCard />
-                            <TransactionCard />
+                            {
+                                props.transaction.length ?
+                                    props.transaction.map((val, idx) => {
+                                        return <TransactionCard data={val} delete={() => deleteCard(idx)} />
+                                    }) :
+                                    null
+                            }
                         </Box>
 
 
@@ -87,13 +88,13 @@ export default function CashierPage() {
                     <Flex ml='10' justify={'flex-start'} w='80%' fontWeight={'bold'}>
                         <Text>Total</Text>
 
-                        <Text ml='8'>Rp 10.000.000</Text>
+                        <Text ml='8'>Rp {totalValue.toLocaleString()}</Text>
                     </Flex>
 
                     <DrawerFooter display={'block'} p='3'>
 
                         <Flex w='100%' justify={'flex-end'} m='0 auto' mt='2'>
-                            <Button variant="outline" mr={3} onClick={onClose} w='50%' border='none' sx={{
+                            <Button variant="outline" mr={3} onClick={deleteAll} w='50%' border='none' sx={{
                                 _hover: {
                                     color: 'red.500',
                                     fontWeight: 'bold',
@@ -116,18 +117,25 @@ export default function CashierPage() {
                 </DrawerContent>
             </Drawer>
 
+            {/* NUMBER OF TRANSACTION ITEM */}
 
+            {
+                props.transaction.length ?
+                    <Badge
+                        colorScheme='red' fontWeight="bold" fontSize='xs'
+                        px={2} py={1} position="absolute"
+                        top={0} right={0} rounded='full'
+                        variant='solid' boxSize='7' zIndex='-1'
+                    >
+                        <Center>
+                            {props.transaction.length}
+                        </Center>
+                    </Badge>
 
-            <Badge
-                colorScheme='red' fontWeight="bold" fontSize='xs'
-                px={2} py={1} position="absolute"
-                top={1} right={0} rounded='full'
-                variant='solid' boxSize='7'
-            >
-                <Center>
-                    8
-                </Center>
-            </Badge>
+                    :
+                    null
+            }
+
         </>
 
     );

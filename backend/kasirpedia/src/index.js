@@ -15,6 +15,12 @@ app.use('/auth', authRoute);
 
 app.use(cors());
 app.use(express.json());
+const {cashierRoute} = require("./routes");
+
+const db = require("./models");
+// db.sequelize.sync({ alter: true });
+
+app.use("/cashier", cashierRoute);
 
 app.listen(PORT, () => {
   console.log(`API IS RUNNING ON PORT ${PORT}`);

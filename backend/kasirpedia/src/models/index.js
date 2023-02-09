@@ -33,6 +33,7 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.products = require("./products")(sequelize, Sequelize);
 
 db.user = require('./user')(sequelize, Sequelize);
 
