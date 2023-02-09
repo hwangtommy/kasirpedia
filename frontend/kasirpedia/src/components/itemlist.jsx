@@ -1,10 +1,13 @@
 import { Flex, Input, Select, Button, Grid, GridItem } from '@chakra-ui/react'
 import ItemCard from './itemcard'
 import InfiniteScroll from "react-infinite-scroll-component";
+import Navbar from "./navbar";
 
 export default function ItemList(){
     return(
-        <>        
+        <>       
+        <Navbar/>
+
         <Flex wrap={"wrap"} maxW={"1100px"} m={"10px"}>
             <Input placeholder='Search items..' size='md' m={"12px"}/>
             <Select placeholder='Categories' mx={"12px"} my={"6px"}>

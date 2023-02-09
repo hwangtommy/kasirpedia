@@ -36,7 +36,7 @@ function ModalPopup(props) {
 
           {/* <Flex > */}
           <ModalCloseButton />
-          <ModalHeader w={"full"} bg="#00A2FF" boxShadow={"xl"} >
+          <ModalHeader w={"full"} bg="#0e66b3" boxShadow={"xl"} >
             <Flex justifyContent={"space-between"}>
               Create, Edit, Delete
             </Flex>
@@ -55,7 +55,7 @@ function ModalPopup(props) {
           <ModalFooter>
             <Flex alignItems="center">
               <button onClick={onOpen}>
-                <DeleteIcon boxSize="7" mx={205} />
+                <DeleteIcon color="red" boxSize="7" mx={205} />
                 <AlertDialog
                   isOpen={isOpen}
                   leastDestructiveRef={cancelRef}

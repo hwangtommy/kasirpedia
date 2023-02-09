@@ -3,6 +3,7 @@ import CashierProductCard from "./cashierCard"
 import InfiniteScroll from 'react-infinite-scroller';
 import { useState } from "react";
 
+
 export default function ListItem(){
     const [data, setData] = useState([1, 2, 3, 4, 5])
     const fetchData = () => {
