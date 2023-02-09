@@ -1,7 +1,7 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
-import routes from "./routes/routes";
-import { useEffect, useState } from "react";
+import { Routes, Route } from 'react-router-dom';
+import routes from './routes/routes';
+import { useEffect, useState } from 'react';
 import Loading from './components/loading';
 
 function App() {
@@ -14,17 +14,15 @@ function App() {
   }, []);
   return (
     <>
-    {isLoading ? (
-      <Loading />
-    ) : (
-      <Routes key={"route"}>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Routes key={'route'}>
           {routes.map((val, key) => {
-            return (
-              <Route exact path={val.path} element={val.element} key={key} />
-            );
+            return <Route exact path={val.path} element={val.element} key={key} />;
           })}
-    </Routes>
-    )}
+        </Routes>
+      )}
     </>
   );
 }

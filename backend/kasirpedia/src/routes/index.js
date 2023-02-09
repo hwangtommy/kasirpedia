@@ -1,5 +1,7 @@
-const cashierRoute = require("./cashier");
+const authRoute = require('./auth');
+const cashierRoute = require('./cashier');
 
 module.exports = {
-  cashierRoute
+  authRoute,
+  cashierRoute,
 };
