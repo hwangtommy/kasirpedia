@@ -29,6 +29,7 @@ import YupPassword from 'yup-password';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import CloseAlert from './closealert';
 
 export default function RegisterCashier() {
   YupPassword(Yup);
@@ -37,7 +38,6 @@ export default function RegisterCashier() {
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { isOpen2, onClose2, onOpen2 } = useDisclosure();
 
   const formik = useFormik({
     initialValues: {
@@ -109,11 +109,17 @@ export default function RegisterCashier() {
                       <Alert status="success" zIndex={2} variant="top-accent">
                         <AlertIcon />
                         {msg}
+                        <CloseButton alignSelf="flex-start" position="relative" right={-1} top={-1} onClick={onClose} />
+
+                        <CloseAlert />
                       </Alert>
                     ) : status === 'error' ? (
                       <Alert status="error" zIndex={2} variant="top-accent">
                         <AlertIcon />
                         {msg}
+                        <CloseButton alignSelf="flex-start" position="relative" right={-1} top={-1} onClick={onClose} />
+
+                        <CloseAlert />
                       </Alert>
                     ) : null}
                     <FormLabel>Username</FormLabel>
