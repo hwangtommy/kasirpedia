@@ -21,7 +21,7 @@ export default function ListItem(){
                 <option value='desc-price'>Price (Highest to Lowest)</option>
             </Select>
             <Select placeholder='Categories' mx={"12px"} my={"12px"} w="25%">
-                <option value='option1'>...</option>
+                <option value='ID'>FOOD</option>
             </Select>
           </Flex>
           <Flex w="100%">
