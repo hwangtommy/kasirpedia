@@ -1,14 +1,20 @@
 import { Grid, Input, Select, Button, Flex, VStack } from "@chakra-ui/react"
 import AdminProductCard from "./adminCard"
 import InfiniteScroll from 'react-infinite-scroller';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../config/config.js";
 
 export default function ListItem(){
-    const [data, setData] = useState([1, 2, 3, 4, 5])
-    const fetchData = () => {
-      const arr = [1,1,1,1,1]
-      setData([...data,...arr])
-    };
+    const [data, setData] = useState([])
+    const fetchData = async () => {
+      await axiosInstance.get("products").then((res) => {
+        const datas = res.data.result
+        setData([...datas])
+      })
+    }
+    useEffect(() => {
+      fetchData()
+    }, [])
     return(
         <>
         <VStack>
@@ -47,7 +53,7 @@ export default function ListItem(){
             
           {
               data.map((val)=>{
-              return <AdminProductCard />
+              return <AdminProductCard data={val}/>
               
               })
           }
