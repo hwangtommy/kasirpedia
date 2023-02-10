@@ -4,8 +4,9 @@ import { Box, Text, Flex } from '@chakra-ui/react';
 export default function Chart(props) {
 
   const CustomTooltip = ({ active, payload, label }) => {
-    if (active) {
-      const amount = payload[0]?.value ? payload[0]?.value : 0;
+    if (active && payload && payload.length > 0) {
+      const payloadItem = payload[0];
+      const amount = payloadItem ? payloadItem.value : 0;
       const newAmount = new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
