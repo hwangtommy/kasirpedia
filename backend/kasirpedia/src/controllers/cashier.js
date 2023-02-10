@@ -1,6 +1,6 @@
 const db = require("../models");
 const { Op } = require("sequelize");
-const {nanoid} = require('nanoid');
+// const {nanoid} = require('nanoid');
 const Products = db.products;
 
 const cashierProducts = {
