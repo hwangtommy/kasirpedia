@@ -5,11 +5,11 @@ export default function Chart(props) {
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
-      const amount = payload[0]?.value;
+      const amount = payload[0]?.value ? payload[0]?.value : 0;
       const newAmount = new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
-      }).format(amount);
+      }).format(amount ? amount : 0);
 
       return (
         <Box className="custom-tooltip" bg='white' borderRadius='md' p='5' border='2px groove black'>
@@ -25,7 +25,7 @@ export default function Chart(props) {
   const newAmount = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
-  }).format(totalAmount);
+  }).format(totalAmount ? totalAmount : 0);
 
   return (
     <>
