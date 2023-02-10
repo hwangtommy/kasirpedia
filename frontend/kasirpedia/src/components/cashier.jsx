@@ -5,14 +5,13 @@ import {
     DrawerCloseButton, Center, Flex,
     Text, Badge,
 } from "@chakra-ui/react";
+import { axiosInstance } from "../config/config";
 import TransactionCard from "./cashierTransactionCard";
+import { useState } from "react";
 
 
 
 export default function CashierPage(props) {
-    // const { isOpen, onOpen, onClose } = useDisclosure();
-    // const btnRef = React.useRef();
-   
 
     function deleteCard(idx) {
         const arr = [...props.transaction]
@@ -21,19 +20,21 @@ export default function CashierPage(props) {
     };
     function deleteAll() {
         props.setTransaction([]);
+    };
+    function confirm() {
+        props.confirmTransaction(totalValue);
+        deleteAll();
+        props.onClose();
     }
+
     const calculateTotalValue = transactions =>
         transactions.reduce((total, transaction) =>
             total + (transaction.price * transaction.qty), 0);
 
     const totalValue = calculateTotalValue(props.transaction);
 
-
-
     return (
         <>
-            
-
             <Drawer
                 isOpen={props.isOpen} placement="right"
                 onClose={props.onClose} finalFocusRef={props.btnRef}
@@ -105,7 +106,7 @@ export default function CashierPage(props) {
                             }}>
                                 Cancel
                             </Button>
-                            <Button color="green" w='50%' border='none' bg='none' sx={{
+                            <Button onClick={confirm} color="green" w='50%' border='none' bg='none' sx={{
                                 _hover: {
                                     'color': "white",
                                     backgroundColor: '#1F8A70'

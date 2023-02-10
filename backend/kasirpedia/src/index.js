@@ -7,13 +7,14 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
-const {cashierRoute} = require("./routes");
+const {cashierRoute, transactionRoute} = require("./routes");
 
 const db = require("./models");
 // db.sequelize.sync({ alter: true });
 
 app.use("/cashier", cashierRoute);
+app.use("/transaction", transactionRoute);
 
 app.listen(PORT, () => {
     console.log(`API IS RUNNING ON PORT ${PORT}`);
-})
+});
