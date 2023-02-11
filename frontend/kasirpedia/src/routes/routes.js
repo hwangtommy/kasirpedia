@@ -41,7 +41,7 @@ const routes = [
     {
         path: "/cashier",
         element: (<CashierItem/>)
-    }
+    },
 ]
 
 export default routes

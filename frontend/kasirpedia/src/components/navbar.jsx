@@ -19,6 +19,7 @@ export default function Navbar(props) {
             pos={"sticky"}
             zIndex={2}
             top="0"
+            
         >
             <Link href="#">
                 <Box as="img" src={KasirpediaLogo} alt="Logo" height="60px" />

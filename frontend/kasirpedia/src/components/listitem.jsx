@@ -2,7 +2,8 @@ import { Grid, Input, Select, Button, Flex, VStack } from "@chakra-ui/react"
 import AdminProductCard from "./adminCard"
 import InfiniteScroll from 'react-infinite-scroller';
 import { useState } from "react";
-
+import AddItem from "./additemmodal";
+import { useDisclosure } from '@chakra-ui/react'
 
 export default function ListItem(){
     const [data, setData] = useState([1, 2, 3, 4, 5])
@@ -10,6 +11,7 @@ export default function ListItem(){
       const arr = [1,1,1,1,1]
       setData([...data,...arr])
     };
+    const { isOpen, onOpen, onClose } = useDisclosure()
     return(
         <>
         <VStack>
@@ -26,7 +28,8 @@ export default function ListItem(){
             </Select>
           </Flex>
           <Flex w="100%">
-            <Button size='md' m={"12px"} w="50%">Add Item</Button>
+          
+            <AddItem/>
             <Button size='md' m={"12px"} w="50%">Manage Categories</Button>
           </Flex>
           <InfiniteScroll

@@ -2,6 +2,7 @@ import { Card, CardHeader, CardBody, CardFooter, Image, VStack, Heading, Flex, C
 import ModalPopup from './modal'
 import { DeleteIcon } from '@chakra-ui/icons'
 
+
 export default function ItemCard(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -22,8 +23,6 @@ export default function ItemCard(props) {
                     <Flex w="full"  alignItems="center">
                     <Button onClick={onOpen} w="1000%" mx={1}>Edit Item</Button>
 
-                        <ModalPopup onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
-                        {/* <DeleteIcon boxSize= "7" mx={2}/> */}
                     </Flex>
                         
 
