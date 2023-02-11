@@ -8,19 +8,16 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-const { authRoute } = require('./routes');
+const { authRoute, cashierRoute } = require('./routes');
 
 const db = require('./models');
 app.use('/auth', authRoute);
+app.use('/cashier', cashierRoute);
 
 app.use(cors());
 app.use(express.json());
-const {cashierRoute} = require("./routes");
 
-const db = require("./models");
-// db.sequelize.sync({ alter: true });
-
-app.use("/cashier", cashierRoute);
+db.sequelize.sync({ alter: true });
 
 app.listen(PORT, () => {
   console.log(`API IS RUNNING ON PORT ${PORT}`);

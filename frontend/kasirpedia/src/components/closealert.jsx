@@ -1,6 +1,6 @@
 import { Alert, AlertIcon, AlertTitle, AlertDescription, Button, Box, useDisclosure, CloseButton } from '@chakra-ui/react';
 
-export default function CloseAlert(props) {
+export default function CloseAlert() {
   const { isOpen: isVisible, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
 
   return isVisible ? (
