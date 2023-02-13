@@ -3,9 +3,7 @@ import {
     Heading, Text, Stack, Image
 } from '@chakra-ui/react';
 
-const IMAGE = 'https://terserahcafenstudio.my.id/wp-content/uploads/2021/09/kopi-o-1000x600-1-600x360.jpg';
-
-export default function AdminProductCard() {
+export default function AdminProductCard(props) {
     return (
         <Center py={5}>
             <Box
@@ -28,7 +26,7 @@ export default function AdminProductCard() {
                 <Image
                     rounded={'lg'} m='0 auto'
                     height={160} width={160}
-                    objectFit={'cover'} src={IMAGE}
+                    objectFit={'cover'} src={props.data.image}
                 />
 
                 <Stack pt={5} align={'center'}>
@@ -36,14 +34,14 @@ export default function AdminProductCard() {
                         fontSize={'lg'}
                         fontFamily={'body'}
                         fontWeight={500}
-                    >Kopi O
+                    >{props.data.name}
                     </Heading>
 
                     <Stack direction={'row'} align={'center'}>
                         <Text
                             fontWeight={200}
                             fontSize={'md'}
-                        >Rp 120.000
+                        >{props.data.price}
                         </Text>
                     </Stack>
                 </Stack>
