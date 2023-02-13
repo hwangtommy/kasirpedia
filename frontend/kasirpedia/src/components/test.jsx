@@ -10,7 +10,6 @@ export default function Test() {
           <Button mx={10} my={10}>
             <RegisterCashier />
           </Button>
-          <CloseAlert />
         </Box>
       </Flex>
     </>

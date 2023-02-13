@@ -21,49 +21,45 @@ import {
   useDisclosure,
   HStack,
   CloseButton,
+  useToast,
 } from '@chakra-ui/react';
 import LogoKasirpedia from '../logos/Kasirpedia-logos_transparent.png';
 import { axiosInstance } from '../config/config';
-import * as Yup from 'yup';
-import YupPassword from 'yup-password';
-import { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import CloseAlert from './closealert';
+import { useEffect } from 'react';
+import axios from 'axios';
+import * as Yup from 'yup';
 
-export default function RegisterCashier() {
-  YupPassword(Yup);
-
-  const [enable, setEnable] = useState(false);
+export default function EditProfile(props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  //   const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
+  const [enable, setEnable] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      id: 0,
-      username: '',
-      name: '',
-      email: '',
-      password: '',
+      id: props.user.id,
+      username: props.user.username,
+      name: props.user.name,
+      email: props.user.email,
     },
     validationSchema: Yup.object().shape({
       username: Yup.string().required('username tidak boleh kosong').min(5, 'min 5'),
       name: Yup.string().required('nama tidak boleh kosong').min(3, 'min 3 huruf'),
       email: Yup.string().required('email tidak boleh kosong').email('ini bukan email'),
-      password: Yup.string().required('password tidak boleh kosong').minLowercase(1, 'min 1 huruf kecil').minUppercase(1, 'min 1 huruf besar').min(5, 'min 5 digit'),
-      confirmation_password: Yup.string()
-        .required('password must match')
-        .oneOf([Yup.ref('password'), null], 'password must match'),
     }),
     onSubmit: async () => {
       // alert("test")
       const res = await axiosInstance
-        .post('/auth/v1', formik.values)
+        .patch('/auth/v3/' + props.user.id, formik.values)
         .then((res) => {
           console.log(res.data);
           setStatus('success');
-          setMsg('Data inserted');
+          setMsg('Data updated');
         })
         .catch((error) => {
           console.log(error);
@@ -74,24 +70,20 @@ export default function RegisterCashier() {
     },
   });
 
-  useEffect(() => {
-    let { username, name, email, password } = formik.values;
-    if (username && name && email && password) {
-      setEnable(true);
-    } else {
-      setEnable(false);
-    }
-  }, [formik.values]);
-
   return (
     <>
-      <Button onClick={onOpen}>Create Cashier</Button>
+      <Button onClick={onOpen}>Edit Account</Button>
 
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           {/* <ModalHeader>Create your account</ModalHeader> */}
-          <ModalCloseButton />
+          <ModalCloseButton
+            onClick={() => {
+              onClose();
+              setStatus('');
+            }}
+          />
           <ModalBody pb={6}>
             {/* Isi modal */}
             <Flex minH={'100vh'} align={'center'} justify={'center'}>
@@ -117,7 +109,7 @@ export default function RegisterCashier() {
                       </Alert>
                     ) : null}
                     <FormLabel>Username</FormLabel>
-                    <Input name="username" onChange={(e) => formik.setFieldValue('username', e.target.value)} placeholder={'Username'} type="username" />
+                    <Input onChange={(e) => formik.setFieldValue('username', e.target.value)} name="username" placeholder={'Username'} type="username" value={formik.values.username} />
                     <FormHelperText w={'268px'} color={'red'}>
                       {formik.errors.username}
                       {/* Enter the email you'd like to receive the newsletter on. */}
@@ -126,8 +118,8 @@ export default function RegisterCashier() {
 
                   <FormControl id="name">
                     <FormLabel>Full name</FormLabel>
-                    <Input name="name" onChange={(e) => formik.setFieldValue('name', e.target.value)} placeholder={'Full name'} type="name" />
-                    <FormHelperText w={'268px'} paddingX="1" color={'red'}>
+                    <Input onChange={(e) => formik.setFieldValue('name', e.target.value)} name="name" placeholder={'Full name'} type="name" value={formik.values.name} />
+                    <FormHelperText w={'268px'} color={'red'}>
                       {formik.errors.name}
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
@@ -135,36 +127,14 @@ export default function RegisterCashier() {
 
                   <FormControl id="email">
                     <FormLabel>Email address</FormLabel>
-                    <Input name="email" onChange={(e) => formik.setFieldValue('email', e.target.value)} placeholder={'Email'} type="email" />
-                    <FormHelperText w={'268px'} paddingX="1" color={'red'}>
+                    <Input onChange={(e) => formik.setFieldValue('email', e.target.value)} name="email" placeholder={'Email'} type="email" value={formik.values.email} />
+                    <FormHelperText w={'268px'} color={'red'}>
                       {formik.errors.email}
                       {/* Enter the email you'd like to receive the newsletter on. */}
                     </FormHelperText>
                   </FormControl>
 
-                  <FormControl id="password">
-                    <FormLabel>Password</FormLabel>
-                    <Input name="password" onChange={(e) => formik.setFieldValue('password', e.target.value)} placeholder={'Password'} type="password" />
-                    <FormHelperText w={'268px'} paddingX="1" color={'red'}>
-                      {formik.errors.password}
-                      {/* Enter the email you'd like to receive the newsletter on. */}
-                    </FormHelperText>
-                  </FormControl>
-
-                  <FormControl>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <Input name="password" onChange={(e) => formik.setFieldValue('confirmation_password', e.target.value)} placeholder="Confirma Password" type={'password'} />
-                    <FormHelperText w={'268px'} color={'red'}>
-                      {formik.errors.confirmation_password}
-                      {/* Enter the email you'd like to receive the newsletter on. */}
-                    </FormHelperText>
-                  </FormControl>
-
                   <Stack spacing={10}>
-                    {/* <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
-                      <Checkbox>Remember me</Checkbox>
-                      <Link color={'blue.400'}>Forgot password?</Link>
-                    </Stack> */}
                     <Button onClick={formik.handleSubmit} disabled={enable ? null : 'disabled'} bg={'#0095F6'} color={'white'}>
                       Add Cashier
                     </Button>
@@ -176,7 +146,14 @@ export default function RegisterCashier() {
 
           <ModalFooter>
             <HStack>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button
+                onClick={() => {
+                  onClose();
+                  setStatus('');
+                }}
+              >
+                Cancel
+              </Button>
             </HStack>
           </ModalFooter>
         </ModalContent>
