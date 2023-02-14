@@ -20,7 +20,7 @@ export default function CashierProductCard(props) {
 
     return (
         <>
-            <Center py={5}>
+            <Center py={5} zIndex={0}>
                 <Box
                     role={'group'} p={3}
                     maxW={'200px'} w={'full'}

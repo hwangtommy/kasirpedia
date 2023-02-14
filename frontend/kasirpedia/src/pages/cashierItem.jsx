@@ -1,4 +1,8 @@
-import { Box, Flex, Icon, Input, InputGroup, InputRightElement, Grid, Select, useDisclosure, IconButton } from '@chakra-ui/react';
+import {
+    Box, Flex, Icon, Input,
+    InputGroup, InputRightElement, Grid,
+    Select, useDisclosure, IconButton, useToast
+} from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
 import Navbar from '../components/navbar';
 import CashierPage from '../components/cashier';
@@ -7,12 +11,26 @@ import { axiosInstance } from '../config/config';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import moment from 'moment';
 
 export default function CashierItem() {
     const [datas, setDatas] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const [transaction, setTransaction] = useState([]);
+    const [search, setSearch] = useState('');
+    const toast = useToast();
+
+
+    function inputHandler(event) {
+        const value = event.target.value;
+        setSearch(value);
+    };
+    function keyPress(event) {
+        if (event.keyCode === 13) {
+            fetchData();
+        }
+    };
 
     function addTransaction(data, qty) {
         console.log("asd")
@@ -24,10 +42,32 @@ export default function CashierItem() {
     }
 
     async function fetchData() {
-        await axiosInstance.get("/cashier").then((res) => {
+        // console.log(search)
+        await axiosInstance.get("/cashier", { params: { q: search } }).then((res) => {
             setDatas([...res.data.result])
         })
-    }
+    };
+
+    async function confirmTransaction(total) {
+        const tr = {
+            userid: 0,
+            total_price: total,
+            transaction_date: moment(new Date()).format("YYYY-MM-DD"),
+            items: JSON.stringify([...transaction])
+        }
+        await axiosInstance.post("/transaction", tr).then((res) => {
+            console.log(res.data.message);
+            toast({
+                title: 'Success!!',
+                description: "Transaction successfully added",
+                status: 'success',
+                duration: 1500,
+                isClosable: true,
+            });
+
+        });
+
+    };
 
     useEffect(() => {
         fetchData()
@@ -36,7 +76,7 @@ export default function CashierItem() {
     return (
         <>
             <Navbar />
-            <Flex w='95%' m='0 auto'>
+            <Flex w='95%' m='10px auto 0'>
 
                 <Box w='100%' h='88vh' overflow={'auto'} bg='none' sx={{
                     '::-webkit-scrollbar': {
@@ -58,7 +98,7 @@ export default function CashierItem() {
                         w='100%' h='60px'
                         position={'sticky'}
                         top='0'
-                        zIndex={'2'}
+                        zIndex={'1'}
                         justify='space-between'
                         alignItems='center' mb='5'
                     >
@@ -76,7 +116,7 @@ export default function CashierItem() {
                         </Select>
                         {/* SEARCH */}
                         <InputGroup bg='white' w='40%' m='2px auto' minW='300px'>
-                            <Input placeholder='Search' size='md' bg='white' />
+                            <Input placeholder='Search' size='md' bg='white' onChange={inputHandler} onKeyDown={keyPress} />
                             <InputRightElement sx={{
                                 _hover: {
                                     borderLeft: '1px solid #e8eaee',
@@ -84,7 +124,7 @@ export default function CashierItem() {
                                     transition: 'all',
                                 },
                             }}>
-                                <Icon as={Search2Icon} />
+                                <Icon as={Search2Icon} onClick={fetchData} />
                             </InputRightElement>
                         </InputGroup>
 
@@ -105,14 +145,15 @@ export default function CashierItem() {
                                     }
                                 }}
                             />
-                            <CashierPage onClose={onClose} btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} transaction={transaction} setTransaction={setTransaction} />
+                            <CashierPage confirmTransaction={confirmTransaction} onClose={onClose} btnRef={btnRef} onOpen={onOpen} isOpen={isOpen} transaction={transaction} setTransaction={setTransaction} />
                         </Box>
 
                     </Flex>
 
                     <Grid
-                        gridTemplateColumns={{ sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)", xl: "repeat(5, 1fr)" }}
-                        gap={{ sm: '1', md: '2', lg: '3', xl: '4' }}
+                        gridTemplateColumns={{ sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)", xl: "repeat(5, 1fr)", '2xl': "repeat(6, 1fr)" }}
+                        // gap={{ sm: '1', md: '2', lg: '3', xl: '4' }}
+                        gap={1}
                     >{/* insert item below */}
 
                         {
