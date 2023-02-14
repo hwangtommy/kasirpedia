@@ -2,6 +2,7 @@ const db = require("../models");
 const { Op } = require("sequelize");
 // const {nanoid} = require('nanoid');
 const Products = db.products;
+const Categories = db.categories;
 
 const cashierProducts = {
     getProducts: async (req, res) => {

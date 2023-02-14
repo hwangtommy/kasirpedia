@@ -80,6 +80,20 @@ export default function Navbar(props) {
                                     color: 'black'
                                 }
                             }}>Sales Report</MenuItem>
+                            
+                            <ReachLink to="/">
+                                <MenuItem bg='none' 
+                                sx={{
+                                    _hover: {
+                                        bg: 'none',
+                                        color: 'gray.500'
+                                    },
+                                    _active: {
+                                        color: 'black'
+                                    },
+                                }}>POS</MenuItem>
+                            </ReachLink>
+                            
                             <MenuItem bg='none' sx={{
                                 _hover: {
                                     bg: 'none',
