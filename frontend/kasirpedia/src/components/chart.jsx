@@ -1,53 +1,66 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { Box, Text, Flex } from '@chakra-ui/react';
 
-const data = [
-    {
-        date: '20/01/2023',
-        total: '3000'
-    },
-    {
-        date: '21/01/2023',
-        total: '35000'
-    },
-    {
-        date: '03/02/2023',
-        total: '45000'
-    },
-    {
-        date: '05/02/2023',
-        total: '38000'
-    },
-    {
-        date: '10/02/2023',
-        total: '39000'
-    },
-]
+export default function Chart(props) {
 
-export default function Chart() {
-    return (
-        <>
-            <ResponsiveContainer width='100%' height='80%'>
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length > 0) {
+      const payloadItem = payload[0];
+      const amount = payloadItem ? payloadItem.value : 0;
+      const newAmount = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(amount ? amount : 0);
 
-                <BarChart
-                    width={500} height={300}
-                    data={data}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey='date' />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey='total' fill='#82ca9d' />
+      return (
+        <Box className="custom-tooltip" bg='white' borderRadius='md' p='5' border='2px groove black'>
+          <Text fontWeight={'bold'} className="label">{`${label}`} </Text>
+          <Text fontWeight={'bold'} className="label">{`${newAmount}`} </Text>
+        </Box>
+      );
+    }
+    return null;
+  };
 
-                </BarChart>
+  const totalAmount = props.data?.reduce((acc, curr) => acc + curr.total, 0);
+  const newAmount = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(totalAmount ? totalAmount : 0);
 
-            </ResponsiveContainer>
-        </>
-    );
+  return (
+    <>
+      <ResponsiveContainer width='100%' height='80%'>
+
+        <BarChart
+          width={500} height={300}
+          data={props?.data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey='date' />
+          <YAxis />
+          {
+            props.data.length ?
+              <Tooltip content={<CustomTooltip />} />
+              : null
+          }
+          <Legend />
+          <Bar dataKey='total' fill='#82ca9d' />
+
+        </BarChart>
+
+
+      </ResponsiveContainer>
+      <Flex style={{ textAlign: 'right', marginTop: 10 }} justify='space-between' fontWeight='bold'>
+          <Text >Total</Text>
+          <Text >{newAmount}</Text>
+      </Flex>
+    </>
+  );
 }

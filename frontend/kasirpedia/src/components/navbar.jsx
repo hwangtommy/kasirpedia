@@ -27,7 +27,7 @@ export default function Navbar(props) {
             minW={"100vw"}
             boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
             pos={"sticky"}
-            zIndex={2}
+            zIndex={8}
             top="0"
         >
             <Link href="#">
@@ -54,7 +54,7 @@ export default function Navbar(props) {
 
                 </MenuButton>
 
-                <MenuList color="black" zIndex='3'>
+                <MenuList color="black" zIndex={3}>
                     {isAdmin ? (
                         <>
                             <MenuItem bg='none' 
