@@ -4,17 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./redux/store";
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from "react-redux";
+import AuthProvider from "./hoc/authProvider";
+import thunk from "redux-thunk";
 
+const store = configureStore({ reducer: rootReducer, middleware: [thunk] });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider>
-    {/* <React.StrictMode> */}
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    {/* </React.StrictMode> */}
-  </ChakraProvider>
+  <Provider store={store}>
+    <AuthProvider>
+      <ChakraProvider>
+        {/* <React.StrictMode> */}
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        {/* </React.StrictMode> */}
+      </ChakraProvider>
+    </AuthProvider>
+  </Provider>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function

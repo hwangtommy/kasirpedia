@@ -3,9 +3,19 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import KasirpediaLogo from "../logos/Kasirpedia-logos_white.png";
 import { useState } from "react";
 import { Link as ReachLink } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import user_types from "../redux/auth/types";
 
 export default function Navbar(props) {
     const [isAdmin, setIsAdmin] = useState(true);
+    let dispatch = useDispatch()
+    function logOut() {
+        dispatch({
+          type: user_types.USER_LOGOUT,
+        });
+        localStorage.clear();
+        window.location.reload(true);
+      }
 
     return (
         <Flex
@@ -94,7 +104,9 @@ export default function Navbar(props) {
                                 }}>POS</MenuItem>
                             </ReachLink>
                             
-                            <MenuItem bg='none' sx={{
+                            <MenuItem bg='none' 
+                            onClick={logOut}
+                            sx={{
                                 _hover: {
                                     bg: 'none',
                                     color: 'gray.500'

@@ -20,6 +20,10 @@ export default function ProtectedPage({
             return navigate("/", { replace: true });
         }
 
+        if (authRoles === "Cashier"){
+            return navigate ("/cahsierpage", { replace: true })
+        }
+
         if (authRoles === "Admin"){
             return navigate ("/admin", { replace: true })
         }
