@@ -5,7 +5,7 @@ import CashierProductCard from '../components/cashierCard';
 import CashierPage from '../components/cashier';
 import Chart from '../components/chart';
 import ListUsers from '../components/listusers';
-
+import ProtectedPage from "./protected";
 import CashierItem from '../pages/cashierItem';
 import LoginPage from '../pages/loginpage';
 
@@ -16,7 +16,10 @@ const routes = [
   },
   {
     path: '/admin',
-    element: <AdminPage />,
+    element: (<ProtectedPage needLogin={true} authRoles="Admin">
+      <AdminPage />
+    </ProtectedPage>
+    ),
   },
   {
     path: '/modal',
@@ -24,28 +27,39 @@ const routes = [
   },
   {
     path: '/item',
-    element: <ItemList />,
+    element: (<ProtectedPage needLogin={true}>
+      <ItemList />
+    </ProtectedPage>),
   },
   {
     path: '/cahsierproduct',
-    element: <CashierProductCard />,
+    element: (<ProtectedPage needLogin={true}>
+      <CashierProductCard />
+    </ProtectedPage>),
   },
   {
     path: '/cashierpage',
-    element: <CashierPage />,
+    element:(<ProtectedPage needLogin={true}>
+      <CashierPage />
+    </ProtectedPage>),
   },
   {
     path: '/chart',
-    element: <Chart />,
+    element: (<ProtectedPage needLogin={true}>
+      <Chart />
+    </ProtectedPage>),
   },
-
   {
     path: '/cashier',
-    element: <CashierItem />,
+    element: (<ProtectedPage needLogin={true}>
+      <CashierItem />
+    </ProtectedPage>),
   },
   {
     path: '/listusers',
-    element: <ListUsers />,
+    element: (<ProtectedPage needLogin={true} authRoles = "Admin">
+      <ListUsers />
+    </ProtectedPage>),
   },
 ];
 

@@ -11,10 +11,41 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import logo from "../logos/Kasirpedia-logos_transparent.png"
+import { Link, useNavigate } from "react-router-dom";
 import validator from 'validator'
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { userLogin } from "../redux/middleware/userauth";
 
 export default function Login() {
+  let dispatch = useDispatch()
+
+  let navigate = useNavigate();
+
+  const [status, setStatus] = useState(false);
+
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
+
+  function inputHandler(event) {
+    const { name, value } = event.target;
+
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  }
+
+  async function Login() {
+    const isAuth = await dispatch(userLogin(user));
+    if (isAuth.status) {
+      return navigate("/", { state: { user: isAuth.data }, replace: true });
+    }
+    return setStatus(true);
+  }
+
   const [emailError, setEmailError] = useState('')
   const validateEmail = (event) => {
     let email = event.target.value
@@ -61,6 +92,7 @@ export default function Login() {
                 justify={'space-between'}>
               </Stack>
               <Button
+                onClick={Login}
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
