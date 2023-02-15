@@ -8,7 +8,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-const { authRoute, cashierRoute } = require('./routes');
+const { authRoute, cashierRoute, transactionRoute } = require('./routes');
 
 const db = require('./models');
 app.use('/auth', authRoute);
@@ -16,10 +16,8 @@ app.use('/cashier', cashierRoute);
 
 app.use(cors());
 app.use(express.json());
-const {cashierRoute, transactionRoute} = require("./routes");
 
-const db = require("./models");
-// db.sequelize.sync({ alter: true });
+db.sequelize.sync({ alter: true });
 
 app.use("/cashier", cashierRoute);
 app.use("/transaction", transactionRoute);

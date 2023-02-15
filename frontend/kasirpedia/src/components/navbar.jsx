@@ -3,11 +3,15 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import KasirpediaLogo from "../logos/Kasirpedia-logos_white.png";
 import { useState } from "react";
 import { Link as ReachLink } from "react-router-dom"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import user_types from "../redux/auth/types";
 
+
 export default function Navbar(props) {
-    const [isAdmin, setIsAdmin] = useState(true);
+    const user = useSelector((state) => {
+        return state.auth;
+    })
+    const [isAdmin, setIsAdmin] = useState(user.isAdmin);
     let dispatch = useDispatch()
     function logOut() {
         dispatch({
@@ -46,7 +50,7 @@ export default function Navbar(props) {
                     }}
                 >
                     <Text>
-                        Erwin
+                        {user?.name}
                     </Text>
                     <Text fontSize="xs">
                         {isAdmin ? "Admin" : "Cashier"}
@@ -91,7 +95,7 @@ export default function Navbar(props) {
                                 }
                             }}>Sales Report</MenuItem>
                             
-                            <ReachLink to="/">
+                            <ReachLink to="/cashier">
                                 <MenuItem bg='none' 
                                 sx={{
                                     _hover: {
