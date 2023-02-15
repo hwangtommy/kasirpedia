@@ -11,7 +11,7 @@ export default function Navbar(props) {
     const user = useSelector((state) => {
         return state.auth;
     })
-    const [isAdmin, setIsAdmin] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(user.isAdmin);
     let dispatch = useDispatch()
     function logOut() {
         dispatch({
@@ -95,7 +95,7 @@ export default function Navbar(props) {
                                 }
                             }}>Sales Report</MenuItem>
                             
-                            <ReachLink to="/">
+                            <ReachLink to="/cashier">
                                 <MenuItem bg='none' 
                                 sx={{
                                     _hover: {
