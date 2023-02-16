@@ -8,7 +8,6 @@ import ListUsers from '../components/listusers';
 import ProtectedPage from './protected';
 import CashierItem from '../pages/cashierItem';
 import LoginPage from '../pages/loginpage';
-import Addform from '../components/itemmodal';
 
 const routes = [
   {
