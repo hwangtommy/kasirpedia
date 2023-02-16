@@ -5,7 +5,7 @@ import CashierProductCard from '../components/cashierCard';
 import CashierPage from '../components/cashier';
 import Chart from '../components/chart';
 import ListUsers from '../components/listusers';
-import ProtectedPage from "./protected";
+import ProtectedPage from './protected';
 import CashierItem from '../pages/cashierItem';
 import LoginPage from '../pages/loginpage';
 import Addform from '../components/itemmodal';
@@ -19,9 +19,10 @@ const routes = [
   },
   {
     path: '/admin',
-    element: (<ProtectedPage needLogin={true} authRoles="Admin">
-      <AdminPage />
-    </ProtectedPage>
+    element: (
+      <ProtectedPage needLogin={true} authRoles="Admin">
+        <AdminPage />
+      </ProtectedPage>
     ),
   },
   {
@@ -30,39 +31,51 @@ const routes = [
   },
   {
     path: '/item',
-    element: (<ProtectedPage needLogin={true}>
-      <ItemList />
-    </ProtectedPage>),
+    element: (
+      <ProtectedPage needLogin={true}>
+        <ItemList />
+      </ProtectedPage>
+    ),
   },
   {
     path: '/cahsierproduct',
-    element: (<ProtectedPage needLogin={true}>
-      <CashierProductCard />
-    </ProtectedPage>),
+    element: (
+      <ProtectedPage needLogin={true}>
+        <CashierProductCard />
+      </ProtectedPage>
+    ),
   },
   {
     path: '/cashierpage',
-    element:(<ProtectedPage needLogin={true}>
-      <CashierPage />
-    </ProtectedPage>),
+    element: (
+      <ProtectedPage needLogin={true}>
+        <CashierPage />
+      </ProtectedPage>
+    ),
   },
   {
     path: '/chart',
-    element: (<ProtectedPage needLogin={true}>
-      <Chart />
-    </ProtectedPage>),
+    element: (
+      <ProtectedPage needLogin={true}>
+        <Chart />
+      </ProtectedPage>
+    ),
   },
   {
     path: '/cashier',
-    element: (<ProtectedPage needLogin={true}>
-      <CashierItem />
-    </ProtectedPage>),
+    element: (
+      <ProtectedPage needLogin={true}>
+        <CashierItem />
+      </ProtectedPage>
+    ),
   },
   {
     path: '/listusers',
-    element: (<ProtectedPage needLogin={true} authRoles = "Admin">
-      <ListUsers />
-    </ProtectedPage>),
+    element: (
+      <ProtectedPage needLogin={true} authRoles="Admin">
+        <ListUsers />
+      </ProtectedPage>
+    ),
   },
 ];
 

@@ -19,9 +19,9 @@ app.use(express.json());
 
 db.sequelize.sync({ alter: true });
 
-app.use("/cashier", cashierRoute);
-app.use("/transaction", transactionRoute);
+app.use('/cashier', cashierRoute);
+app.use('/transaction', transactionRoute);
 
 app.listen(PORT, () => {
-    console.log(`API IS RUNNING ON PORT ${PORT}`);
+  console.log(`API IS RUNNING ON PORT ${PORT}`);
 });
