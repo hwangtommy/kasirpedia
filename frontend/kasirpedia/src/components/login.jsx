@@ -28,13 +28,23 @@ export default function Login() {
   }
 
   async function Login() {
-    const isAuth = await dispatch(userLogin(user));
+    const isAuth = await dispatch(
+      userLogin({
+        email,
+        password,
+      })
+    );
     if (isAuth.status) {
-      return navigate('/', { state: { user: isAuth.data }, replace: true });
+      if (isAuth.data.isAdmin) {
+        return navigate('/admin', { state: { user: isAuth.data }, replace: true });
+      }
+      return navigate('/cashier', { state: { user: isAuth.data }, replace: true });
     }
     return setStatus(true);
   }
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const validateEmail = (event) => {
     let email = event.target.value;
@@ -42,8 +52,10 @@ export default function Login() {
       setEmailError('Please enter valid email');
     } else {
       setEmailError('');
+      setEmail(event.target.value);
     }
   };
+
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
@@ -55,7 +67,7 @@ export default function Login() {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(event) => validateEmail(event)} />
+              <Input type="email" onChange={(e) => validateEmail(e)} />
             </FormControl>
             <span
               style={{
@@ -67,7 +79,7 @@ export default function Login() {
             </span>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input type="password" onChange={(e) => setPassword(e.target.value)} />
             </FormControl>
             <Stack spacing={10}>
               <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}></Stack>

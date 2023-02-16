@@ -189,6 +189,37 @@ const authController = {
       });
     }
   },
+  login: async (req, res) => {
+    const { email, password } = req.body;
+    const result = await User.findOne({
+      where: {
+        email: email
+      }
+    })
+
+    if (!result){
+      return res.status(400).json({
+        message: "User not found"
+      })
+    }
+
+    else{
+      const check = bcrypt.compare(password, result.password)
+
+      if (!check){
+        console.log("abc")
+        return res.status(400).json({
+          message: "Wrong password"
+        })
+      }
+
+      console.log("cba")
+      return res.status(200).json({
+        message: "Logged in",
+        result: result
+      })
+    }
+  }
 };
 
 module.exports = authController;

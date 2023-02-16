@@ -17,7 +17,7 @@ export default function ProtectedPage({
         }
 
         if (guestOnly && userSelector.id) {
-            return navigate("/", { replace: true });
+            return navigate("/cashier", { replace: true });
         }
 
         if (authRoles === "Cashier"){

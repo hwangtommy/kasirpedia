@@ -12,7 +12,9 @@ import LoginPage from '../pages/loginpage';
 const routes = [
   {
     path: '/',
-    element: <LoginPage />,
+    element: (<ProtectedPage guestOnly={true}>
+      <LoginPage />
+    </ProtectedPage>),
   },
   {
     path: '/admin',

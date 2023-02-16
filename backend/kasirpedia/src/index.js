@@ -17,7 +17,7 @@ app.use('/cashier', cashierRoute);
 app.use(cors());
 app.use(express.json());
 
-// db.sequelize.sync({ alter: true });
+db.sequelize.sync({ alter: true });
 
 app.use('/cashier', cashierRoute);
 app.use('/transaction', transactionRoute);
