@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const  cashierProducts  = require('../controllers/cashier');
+const cashierProducts  = require('../controllers/cashier');
 
 router.get("/", cashierProducts.getProducts);
 router.post("/products", cashierProducts.addProducts);
