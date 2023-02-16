@@ -95,19 +95,6 @@ export default function Navbar(props) {
                                 }
                             }}>Sales Report</MenuItem>
                             
-                            <ReachLink to="/cashier">
-                                <MenuItem bg='none' 
-                                sx={{
-                                    _hover: {
-                                        bg: 'none',
-                                        color: 'gray.500'
-                                    },
-                                    _active: {
-                                        color: 'black'
-                                    },
-                                }}>POS</MenuItem>
-                            </ReachLink>
-                            
                             <MenuItem bg='none' 
                             onClick={logOut}
                             sx={{
@@ -121,7 +108,9 @@ export default function Navbar(props) {
                             }}>Log Out</MenuItem>
                         </>
                     ) : (
-                        <MenuItem bg='none' sx={{
+                        <MenuItem bg='none' 
+                        onClick={logOut}
+                        sx={{
                             _hover: {
                                 bg: 'none',
                                 color: 'gray.500'

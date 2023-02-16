@@ -189,6 +189,7 @@ const authController = {
       });
     }
   },
+
   login: async (req, res) => {
     const { email, password } = req.body;
     const result = await User.findOne({
@@ -213,11 +214,13 @@ const authController = {
         })
       }
 
-      console.log("cba")
-      return res.status(200).json({
-        message: "Logged in",
-        result: result
-      })
+      else{
+        console.log("cba")
+        return res.status(200).json({
+          message: "Logged in",
+          result: result
+        })
+      }
     }
   }
 };

@@ -1,9 +1,9 @@
-const productController = require("./cashier");
+const cashierProducts = require("./cashier");
 const transactionController = require("./transaction");
 const authController = require('./auth');
 
 module.exports = {
-    productController,
+    cashierProducts,
     transactionController,
     authController,
 }
