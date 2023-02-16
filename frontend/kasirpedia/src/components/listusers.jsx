@@ -51,6 +51,7 @@ export default function ListUsers(props) {
                             <Th>Name</Th>
                             <Th>Email</Th>
                             <Th></Th>
+                            <Th></Th>
                           </Tr>
                         </Thead>
                         <Tbody>
