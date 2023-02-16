@@ -1,25 +1,33 @@
-import { Grid, Input, Select, Button, Flex, VStack } from "@chakra-ui/react"
+import { Grid, Input, Select, Button, Flex, VStack, InputGroup, InputRightElement, Icon } from "@chakra-ui/react"
+import { Search2Icon } from '@chakra-ui/icons';
 import AdminProductCard from "./adminCard"
 import InfiniteScroll from 'react-infinite-scroller';
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../config/config.js";
 
 export default function ListItem(){
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const [search, setSearch] = useState("")
+    const [counter, setCounter] = useState(0)
+
+    function searchInputHandler(event) {
+      const value = event.target.value;
+      setSearch(value);
+    };
     const fetchData = async () => {
-      await axiosInstance.get("products").then((res) => {
-        const datas = res.data.result
-        setData([...datas])
-      })
+      await axiosInstance.get("/cashier", { params: { q: search } }).then((res) => {
+        setData([...res.data.result])
+    })
     }
     useEffect(() => {
       fetchData()
     }, [])
+
     return(
         <>
         <VStack>
           <Flex w="100%">
-            <Input placeholder='Search items..' size='md' m={"12px"} w="50%"/>
+            <Input placeholder='Search items..' size='md' m={"12px"} w="50%" onChange={searchInputHandler}/>
             <Select placeholder='Sort by' mx={"12px"} my={"12px"} w="25%">
                 <option value='asc-name'>Name (Ascending)</option>
                 <option value='desc-name'>Name (Descending)</option>
@@ -36,8 +44,8 @@ export default function ListItem(){
           </Flex>
           <InfiniteScroll
           pageStart={0}
-          loadMore={fetchData}
-          hasMore={true || false}
+          loadMore={console.log("abc")}
+          hasMore={false}
           loader={<div className="loader" key={0}>Loading ...</div>}
     
           // Need to re-configure InfiniteScroll once backend is done.
