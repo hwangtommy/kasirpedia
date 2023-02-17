@@ -4,11 +4,12 @@ import AdminProductCard from './adminCard';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../config/config.js';
+// import { products } from '../../../../backend/kasirpedia/src/models';
 
 export default function ListItem(props) {
   const [data, setData] = useState([]);
   const [dataCat, setDataCat] = useState([]);
-  const [dataProd, setDataProd] = useState({ ...props.data });
+  // const [dataProd, setDataProd] = useState([]);
   const [search, setSearch] = useState('');
   const [counter, setCounter] = useState(0);
 
@@ -30,9 +31,48 @@ export default function ListItem(props) {
     });
   };
 
+  // const fetchByCategory = async () => {
+  //   await axiosInstance.post('/cashier/productsbycat' + products.category_id).then((res) => {
+  //     const datas = res.data.result;
+
+  //     setDataProd([...datas]);
+  //   });
+  // };
+
+  function onSelectionChange(e) {
+    const sortDirection = e.target.value;
+    const copyArray = [...data]; // create a new array & not mutate state
+
+    copyArray.sort((a, b) => {
+      return sortDirection === 'name-asc'
+        ? a.name > b.name
+          ? 1
+          : -1
+        : sortDirection === 'name-desc'
+        ? a.name > b.name
+          ? -1
+          : 1
+        : sortDirection === 'asc-price'
+        ? a.price - b.price
+        : sortDirection === 'desc-price'
+        ? b.price - a.price
+        : null;
+    });
+    setData(copyArray); //re-render
+    console.log(copyArray);
+  }
+
+  // const Capek = () => {
+  //   const filteredProd = data.filter((prod) => {
+  //     return prod.target.value;
+  //   });
+  //   return filteredProd;
+  // };
+
   useEffect(() => {
     fetchData();
     fetchDataCategory();
+    // fetchByCategory();
   }, []);
 
   return (
@@ -40,17 +80,17 @@ export default function ListItem(props) {
       <VStack>
         <Flex w="100%">
           <Input placeholder="Search items.." size="md" m={'12px'} w="50%" onChange={searchInputHandler} />
-          <Select placeholder="Sort by" mx={'12px'} my={'12px'} w="25%">
-            <option value="asc-name">Name (Ascending)</option>
-            <option value="desc-name">Name (Descending)</option>
+          <Select onChange={onSelectionChange} placeholder="Sort by" mx={'12px'} my={'12px'} w="25%">
+            <option value={'name-asc'}>Name (Ascending)</option>
+            <option value={'name-desc'}>Name (Descending)</option>
             <option value="asc-price">Price (Lowest to Highest)</option>
             <option value="desc-price">Price (Highest to Lowest)</option>
           </Select>
           <Select placeholder="All Category" mx={'12px'} my={'12px'} w="25%">
-            <option value="">All</option>
+            {/* <option value="">All</option> */}
             {dataCat.map((val, idx) => {
               return (
-                <option key={idx} data={{ ...val }}>
+                <option value={idx} key={idx} data={{ ...val }}>
                   {val.category}
                 </option>
               );
@@ -70,6 +110,12 @@ export default function ListItem(props) {
             return <AdminProductCard key={idx} data={val} />;
           })}
         </Grid>
+
+        {/* <Grid gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)', xl: 'repeat(5, 1fr)' }} gap={{ sm: '1', md: '2', lg: '3', xl: '4' }}>
+          {dataProd.map((val, idx) => {
+            return <AdminProductCard key={idx} data={val} />;
+          })}
+        </Grid> */}
 
         {/* <InfiniteScroll
           pageStart={0}

@@ -40,4 +40,6 @@ db.transactionitem = require('./transactionitem')(sequelize, Sequelize);
 
 db.user = require('./user')(sequelize, Sequelize);
 
+db.products.belongsTo(db.category, { foreignKey: 'category_id' });
+
 module.exports = db;

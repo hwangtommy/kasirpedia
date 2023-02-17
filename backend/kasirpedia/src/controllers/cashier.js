@@ -7,14 +7,11 @@ const Categories = db.category;
 const cashierProducts = {
   getProducts: async (req, res) => {
     try {
-      const q = req.query.q ? req.query.q : '';
-
+      // const id = req.params.category_id;
       const result = await Products.findAll({
-        where: {
-          name: {
-            [Op.like]: `%${q}%`,
-          },
-        },
+        attributes: ['id', 'name', 'price', 'description', 'category_id', 'path'],
+
+        // order: [['name', 'ASC']],
       });
 
       return res.status(200).json({
@@ -102,9 +99,8 @@ const cashierProducts = {
   getCategory: async (req, res) => {
     try {
       const result = await Categories.findAll({
-        attributes: ['id', 'category'],
-
-        order: [['id', 'DESC']],
+        // attributes: ['id', 'category'],
+        // order: [['id', 'DESC']],
       });
 
       return res.status(200).json({
@@ -120,11 +116,14 @@ const cashierProducts = {
   },
   getProductsbyCategory: async (req, res) => {
     try {
-      const cat = req.query.cat ? req.query.cat : '';
+      const id = req.params.category_id;
 
       const result = await Products.findAll({
+        attributes: ['id', 'name', 'price', 'description', 'category_id', 'path'],
+
+        // order: [['category_id', 'ASC']],
         where: {
-          category_id: cat, // Find category_id from category
+          category_id: id,
         },
       });
 
