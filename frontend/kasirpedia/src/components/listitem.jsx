@@ -9,7 +9,9 @@ import { axiosInstance } from '../config/config.js';
 export default function ListItem(props) {
   const [data, setData] = useState([]);
   const [dataCat, setDataCat] = useState([]);
-  // const [dataProd, setDataProd] = useState([]);
+
+  const [product, setProduct] = useState({ ...props.data });
+  const [dataProd, setDataProd] = useState([]);
   const [search, setSearch] = useState('');
   const [counter, setCounter] = useState(0);
 
@@ -31,13 +33,14 @@ export default function ListItem(props) {
     });
   };
 
-  // const fetchByCategory = async () => {
-  //   await axiosInstance.post('/cashier/productsbycat' + products.category_id).then((res) => {
-  //     const datas = res.data.result;
-
-  //     setDataProd([...datas]);
-  //   });
-  // };
+  const fetchByCategory = async () => {
+    const res = await axiosInstance.post('/cashier/productsbycat/' + product.category_id).then((res) => {
+      const datas = res.data.result;
+      console.log(datas);
+      setProduct([...datas]);
+      console.log(datas);
+    });
+  };
 
   function onSelectionChange(e) {
     const sortDirection = e.target.value;
@@ -72,7 +75,7 @@ export default function ListItem(props) {
   useEffect(() => {
     fetchData();
     fetchDataCategory();
-    // fetchByCategory();
+    fetchByCategory();
   }, []);
 
   return (
@@ -111,11 +114,11 @@ export default function ListItem(props) {
           })}
         </Grid>
 
-        {/* <Grid gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)', xl: 'repeat(5, 1fr)' }} gap={{ sm: '1', md: '2', lg: '3', xl: '4' }}>
+        <Grid gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)', xl: 'repeat(5, 1fr)' }} gap={{ sm: '1', md: '2', lg: '3', xl: '4' }}>
           {dataProd.map((val, idx) => {
             return <AdminProductCard key={idx} data={val} />;
           })}
-        </Grid> */}
+        </Grid>
 
         {/* <InfiniteScroll
           pageStart={0}
